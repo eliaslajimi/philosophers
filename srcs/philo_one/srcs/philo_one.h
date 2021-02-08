@@ -14,6 +14,7 @@ typedef struct t_strct
 	int		timeToDie;	
 	int		timeToEat;
 	int		timeToSleep;
+	int		nbrOfEat;
 	pthread_t	thread;	
 }	s_strct;
 

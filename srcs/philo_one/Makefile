@@ -12,7 +12,9 @@ OBJ = $(SRCS:%c=%o)
 
 philo_one: $(OBJ)
 	$(CC) $(FLAGS) $^ -o $@ 
-
+	$(clean)
+clean:
+	rm -f $(OBJ)
 #$(SRCDIR)/%.o:%.c 
 #	$(CC) $(FLAGS) -c $< -o $@ 
 
