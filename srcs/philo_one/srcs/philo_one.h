@@ -5,17 +5,29 @@
 #include <string.h>
 #include <limits.h>
 #include <errno.h>
+#include <sys/time.h>
 #include <math.h>
-#include <sys/times.h>
+
+# define NIL 0
+# define INIT 1
+# define FREE 2
+# define TAKEN 3
 
 typedef struct t_strct
 {
-	int		nbrPhilos;
+	pthread_t	thread;	
+	int		fork[2];
+	int		*bfork;
+	pthread_mutex_t *mutex;
+	int		id;
 	int		timeToDie;	
 	int		timeToEat;
 	int		timeToSleep;
 	int		nbrOfEat;
-	pthread_t	thread;	
+	int		nbrPhilos;
+	int		elapsed;
+	struct t_strct	*next;
+
 }	s_strct;
 
 //UTILS
