@@ -1,4 +1,4 @@
-#include "philo.h"
+#include "philo_one.h"
 
 pthread_mutex_t mutex1 = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t mutex2 = PTHREAD_MUTEX_INITIALIZER;

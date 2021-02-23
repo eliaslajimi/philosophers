@@ -1,4 +1,4 @@
-#include "philo.h"
+#include "philo_one.h"
 
 
 int     setforks(s_strct *philo, int STATUS)
