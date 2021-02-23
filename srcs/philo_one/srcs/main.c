@@ -96,36 +96,39 @@ void *startProc(void *strct)
 	s_strct		*data;
 	struct timeval start, end;
 
-	printf("goes through here\n");
-	fflush(stdout);
 	data = (s_strct*)strct;
 
-	//int bfork[data->nbrPhilos];
 
 	setforks(data, INIT);
-	//pthread_mutex_t fork[data->nbrPhilos];//put in function
 	int lfork = data->fork[0];
 	int rfork = data->fork[1];
 
+	int temp = 0;
 	pthread_mutex_init(&data->mutex[lfork], NULL);
 	pthread_mutex_init(&data->mutex[rfork], NULL);
 	gettimeofday(&start, NULL);
 
-	usleep(data->id * 1000);
 	while(1)
 	{
-		while (!setforks(data, NIL))
+		while (*(data->isDead)|| !setforks(data, NIL))
 		{
 			gettimeofday(&end, NULL);
-			data->elapsed = (end.tv_usec - start.tv_usec) / 1000.0;//ms
+			data->elapsed = ((end.tv_usec/1000 + end.tv_sec*1000) - (start.tv_usec/1000 + start.tv_sec*1000));//ms
+			if (*(data->isDead))
+			{
+				//exit(0);
+			//	return (NULL);
+			}
 			if (data->elapsed >= (data->timeToDie))
 			{
 				printf("philo %d is dead\n", data->id);
 				printf("time starving is %d[%d]\n", data->elapsed , data->timeToDie);
 				fflush(stdout);
-				exit(1);
+				*(data->isDead) = 1;
+				printf("things are going well\n");
+				fflush(stdout);
+				exit(0);
 			}
-			usleep(10);
 		}
 		setforks(data, TAKEN);	
 		pthread_mutex_lock(&data->mutex[lfork]);
@@ -139,10 +142,14 @@ void *startProc(void *strct)
 		pthread_mutex_unlock(&data->mutex[rfork]);
 		setforks(data, FREE);	
 		usleep(data->timeToSleep * 1000);
+		gettimeofday(&end, NULL);
+		data->elapsed = ((end.tv_usec/1000 + end.tv_sec*1000) - (start.tv_usec/1000 + start.tv_sec*1000));//ms
+		if (data->elapsed >= (data->timeToDie))
+				*(data->isDead) = 1;
 		printf("[philo %d thinking..]\n", data->id);
 		fflush(stdout);
 	}
-	return NULL;	
+	return (NULL);	
 }
 
 int checkerror(char **input)
@@ -205,11 +212,18 @@ int wrapper(s_strct *data)//wrapper is a ressource manager
  	pthread_t philo[data->nbrPhilos];
 	int nbrPhilos = data->nbrPhilos;
 	int i = 0;
+	int *temp;
+	int j = 0;
+
+	temp = &j;
+
+	
 	while (i < nbrPhilos)
 	{
-		//usleep(100);
-		pthread_create(&philo[i], NULL, startProc, data);
-		data = data->next;
+		data->isDead = temp;
+		pthread_create(&(philo[i]), NULL, &startProc, data);
+		if (data)
+			data = data->next;
 		i++;
 	}
 	i = 0;

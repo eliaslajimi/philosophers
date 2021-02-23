@@ -26,6 +26,7 @@ typedef struct t_strct
 	int		nbrOfEat;
 	int		nbrPhilos;
 	int		elapsed;
+	int		*isDead;
 	struct t_strct	*next;
 
 }	s_strct;
