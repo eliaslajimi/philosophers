@@ -46,13 +46,15 @@ s_strct *init(char **input, s_strct *philo)
 	int		*isDead;
 	int		nbrPhilos;
 	pthread_mutex_t	*mutex2;
-	mutex2 = malloc(ft_atoi(input[1]) * sizeof(mutex2));
+	mutex2 = malloc(ft_atoi(input[1]) * sizeof(pthread_mutex_t));
 
 	i = 0;
-	bfork = malloc(philo->nbrPhilos * 4);
+	bfork = malloc(ft_atoi(input[1]) * 4);
 	isDead = malloc(4);
 	*isDead = 0;
 	nbrPhilos = ft_atoi(input[1]);
+	philo = malloc(sizeof(s_strct) * (nbrPhilos + 1));
+
 	while (i < nbrPhilos)	
 	{
 		philo[i].id = i;

@@ -1,248 +1,51 @@
 #include "philo_one.h"
 
-/*
- * =================================================
- * Problem: 
- *
- * Program has 5 options:
- * - number_of_philosophers 
- * - time_to_die
- * - time_to_eat
- * - time_to_sleep
- * - number_of_time_each_philosopher_must_eat
- *
- * philosopher should be given a number from 1 to n of phi
- * 5 philosphers are eating, and they all need two forks to eat.
- * Philosopher n can only take fork n and n+1.
- * =================================================
- */
-
-//void *tick(void *data)
-//{
-//	gettimeofday(&start, NULL);
-//	gettimeofday(&end, NULL);
-//	int *result;
-//	while((end.tvsec - start.tvsec) < time){gettimeofday(&end, NULL); usleep((1000));}
-//	if ((end - start) >= time)//address proper calculation
-//	{
-//		pthread_mutex_unlock(((s_strct*)data)->mutex);
-//		return (NULL);
-//	}
-//	*result = 1;
-//	return (result);
-//}
-
-void printStruct(s_strct *data)
-{
-	printf("philo id [%d]\n", data->id);
-	fflush(stdout);
-	printf("philo id [%d]\n", data->next->id);
-	fflush(stdout);
-}
-
-//void initfork(int *bfork[])
-//{
-//	int i;
-//
-//	i = 0;
-//	while (i < size)
-//		*bfork[i++] = 1;
-//}
-
-int	setforks(s_strct *data, int STATUS)
-{
-
-//	printf("%d\n", *bfork[0]);
-//	fflush(stdout);
-//	printf("goes through %d\n", data->fork[0]);
-//	fflush(stdout);
-	int i;
-	int lfork, rfork;
-
-	lfork = data->fork[0];
-	rfork = data->fork[1];
-	i = 0;
-	if (STATUS == INIT)
-	{
-		while (i < data->nbrPhilos)
-			data->bfork[i++] = 1;
-	}
-	if (STATUS == FREE)
-	{
-		data->bfork[lfork] = 1;	
-		data->bfork[rfork] = 1;
-	}
-	if (STATUS == TAKEN)
-	{
-		data->bfork[lfork] = 0;	
-		data->bfork[rfork] = 0;
-	}
-	i =0;
-//	printf("philo %d, lfork: %d, rfork %d\n", data->id, data->bfork[lfork], data->bfork[rfork]);
-//	fflush(stdout);
-	return ((data->bfork[lfork] == 1 && data->bfork[rfork] == 1));
-}
-
-void printtime(s_strct *data)
-{
-		printf("\n~~~~~~\nphilo %d is eating\n", data->id);
-		fflush(stdout);
-		//printf("philo %d wait is: %ld micro seconds\n~~~~~~\n", data->id, ((end.tv_sec * 1000000 + end.tv_usec) - (start.tv_sec * 1000000 + start.tv_usec)));
-}
-
-void *startProc(void *strct)
-{
-	int i = 0;
-	s_strct		*data;
-	struct timeval start, end;
-
-	data = (s_strct*)strct;
-
-
-	setforks(data, INIT);
-	int lfork = data->fork[0];
-	int rfork = data->fork[1];
-
-	int temp = 0;
-	pthread_mutex_init(&data->mutex[lfork], NULL);
-	pthread_mutex_init(&data->mutex[rfork], NULL);
-	gettimeofday(&start, NULL);
-
-	while(1)
-	{
-		while (*(data->isDead)|| !setforks(data, NIL))
-		{
-			gettimeofday(&end, NULL);
-			data->elapsed = ((end.tv_usec/1000 + end.tv_sec*1000) - (start.tv_usec/1000 + start.tv_sec*1000));//ms
-			if (*(data->isDead))
-			{
-				//exit(0);
-			//	return (NULL);
-			}
-			if (data->elapsed >= (data->timeToDie))
-			{
-				printf("philo %d is dead\n", data->id);
-				printf("time starving is %d[%d]\n", data->elapsed , data->timeToDie);
-				fflush(stdout);
-				*(data->isDead) = 1;
-				printf("things are going well\n");
-				fflush(stdout);
-				exit(0);
-			}
-		}
-		setforks(data, TAKEN);	
-		pthread_mutex_lock(&data->mutex[lfork]);
-		pthread_mutex_lock(&data->mutex[rfork]);
-		gettimeofday(&end, NULL);
-		printf("\n~~~~~~~\n[philo %d is eating after %d seconds]\n~~~~~~\n\n", data->id,(int) (((end.tv_sec - start.tv_sec))));
-		fflush(stdout);
-		usleep(data->timeToEat * 1000);
-		gettimeofday(&start, NULL);
-		pthread_mutex_unlock(&data->mutex[lfork]);
-		pthread_mutex_unlock(&data->mutex[rfork]);
-		setforks(data, FREE);	
-		usleep(data->timeToSleep * 1000);
-		gettimeofday(&end, NULL);
-		data->elapsed = ((end.tv_usec/1000 + end.tv_sec*1000) - (start.tv_usec/1000 + start.tv_sec*1000));//ms
-		if (data->elapsed >= (data->timeToDie))
-				*(data->isDead) = 1;
-		printf("[philo %d thinking..]\n", data->id);
-		fflush(stdout);
-	}
-	return (NULL);	
-}
-
 int checkerror(char **input)
 {
-	int i;
+        int i;
 
-	i = 1;
-	while(input[i] && ft_atoi(input[i]) > 0)
-		i++;
-	return ((i == 4) || (i == 5));
+        i = 1;
+        while(input[i] && ft_atoi(input[i]) >= 0)
+                i++;
+        return ((i >= 4) && (i <= 5));
 }
 
-s_strct *init(char **input)//Refactor this function into 2.
+int	threadJoin(int nOfThreads, pthread_t *thread, void **ret)
 {
+	static int i;
 
-	int i;
-	int nbrPhilos;
-	s_strct *philo;
-	s_strct *init;
-
-      	nbrPhilos = ft_atoi(input[1]);
-	pthread_mutex_t fork[nbrPhilos];//put in function
-	int bfork[nbrPhilos];
-	i = 0;
-	init = malloc(sizeof(s_strct));
-	philo = init;
-	while(i < nbrPhilos)
-	{
-		philo->timeToDie	= ft_atoi(input[2]);
-		philo->timeToEat	= ft_atoi(input[3]);
-		philo->timeToSleep	= ft_atoi(input[4]);
-		philo->id		= i;
-		philo->nbrPhilos	= nbrPhilos;
-		philo->bfork		= &bfork[0];
-		philo->mutex		= &fork[0];
-		philo->elapsed		= 0;
-		if (input[5])
-			philo->nbrOfEat	= ft_atoi(input[5]);
-		else
-			philo->nbrOfEat	= 0;
-
-//==================================== Give fork refactor to function
-		if (!philo->id)
-			philo->fork[0] = nbrPhilos - 1;
-		else
-			philo->fork[0] = philo->id - 1;
-		philo->fork[1] = philo->id;
-//==================================== Give fork refactor to function
-
-		i++;
-		philo->next = malloc(sizeof(s_strct));
-		philo = philo->next;
-	}
-	philo = NULL;
-	return (init);
+	while (i < nOfThreads)
+		pthread_join(thread[i++], ret);
+	return (0);
 }
 
-int wrapper(s_strct *data)//wrapper is a ressource manager
+int	threadCreate(int nOfThreads, pthread_t *thread, s_strct *arg)
 {
- 	pthread_t philo[data->nbrPhilos];
-	int nbrPhilos = data->nbrPhilos;
-	int i = 0;
-	int *temp;
-	int j = 0;
+	static int	i;
 
-	temp = &j;
-
-	
-	while (i < nbrPhilos)
+	while (i < nOfThreads)
 	{
-		data->isDead = temp;
-		pthread_create(&(philo[i]), NULL, &startProc, data);
-		if (data)
-			data = data->next;
-		i++;
-	}
-	i = 0;
-	while (i < nbrPhilos)
-	{
-		pthread_join(philo[i], NULL);
+		pthread_create(&thread[i], NULL, threadProc, (void*)&arg[i]);
 		i++;
 	}
 	return (0);
 }
 
-int main(int argc, char **argv)
+int	initiateThread(s_strct *philo, int nbrPhilos)
 {
-	s_strct *philo;
+	pthread_t	thread[nbrPhilos];	
+
+	threadCreate(nbrPhilos, &thread[0], philo);
+	threadJoin(nbrPhilos, &thread[0], NULL);
+	return (0);
+}
+
+int	main(int argc, char **argv)
+{
+	s_strct	*philo;
 
 	if (!checkerror(argv))
 		return (0);
-	philo = init(argv);
-	wrapper(philo);
-	printf("done\n");
+	initiateThread(init(argv, &philo[0]), ft_atoi(argv[1]));
 	return (0);
 }
