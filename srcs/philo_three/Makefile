@@ -9,9 +9,9 @@ FILES =	init.c\
 SRC = $(addprefix srcs/, $(FILES))
 DIR = ./srcs
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
-HEADR = srcs/philo_one.h
-TARGET = philo_one 
+FLAGS = -Wall -Wextra -Werror -g
+HEADR = srcs/philo_three.h
+TARGET = philo_three
 RM = rm
 RMFLAG = -f
 OBJ = $(SRC:%c=%o)

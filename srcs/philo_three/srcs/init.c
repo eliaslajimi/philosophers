@@ -1,4 +1,4 @@
-#include "philo_one.h"
+#include "philo_three.h"
 
 
 int     setforks(s_strct *philo, int STATUS)
@@ -28,7 +28,7 @@ int     setforks(s_strct *philo, int STATUS)
         return ((philo->bfork[lfork] == 1 && philo->bfork[rfork] == 1));
 }
 
-int	distributeForks(s_strct *philo, int *bfork, pthread_mutex_t *mfork)
+int	distributeForks(s_strct *philo, int *bfork)
 {
 	if (!philo->id)
 		philo->fork[0] = philo->nbrPhilos - 1;
@@ -45,15 +45,19 @@ s_strct *init(char **input, s_strct *philo)
 	int		*bfork;
 	int		*isDead;
 	int		nbrPhilos;
-	pthread_mutex_t	*mutex2;
+	sem_t		*semFork;
+	sem_t		*semPrint;
 
 	i = 0;
+	bfork = malloc(ft_atoi(input[1]) * 4);
 	isDead = malloc(4);
 	*isDead = 0;
 	nbrPhilos = ft_atoi(input[1]);
-	bfork = malloc((ft_atoi(input[1]) + 1) * 4);
-	mutex2 = malloc((ft_atoi(input[1]) + 1) * sizeof(pthread_mutex_t));
 	philo = malloc(sizeof(s_strct) * (nbrPhilos + 1));
+	sem_unlink(SEM_FORKS);
+	sem_unlink(SEM_PRINT);
+	semFork = sem_open(SEM_FORKS, O_CREAT, 0660, nbrPhilos);
+	semPrint = sem_open(SEM_PRINT, O_CREAT, 0660, 1);
 	while (i < nbrPhilos)	
 	{
 		philo[i].id = i;
@@ -63,9 +67,9 @@ s_strct *init(char **input, s_strct *philo)
 		philo[i].timeToSleep = ft_atoi(input[4]);
 		philo[i].nbrOfEat = ft_atoi(input[5]);
 		philo[i].isDead = isDead;
-		philo[i].mfork = &mutex2[0];
-		pthread_mutex_init(&philo[i].mfork[i], NULL);
-		distributeForks(&philo[i], &bfork[0], &mutex2[0]);
+		philo[i].semFork = semFork;
+		philo[i].semPrint = semPrint;
+		distributeForks(&philo[i], &bfork[0]);
 		i++;
 	}
 	setforks(&philo[0], INIT);

@@ -1,5 +1,5 @@
-#ifndef _PHILO_H
-# define _PHILO_H
+#ifndef _PHILO_THREE_H
+# define _PHILO_THREE_H
 
 #include <pthread.h>
 #include <stdio.h>
@@ -10,6 +10,8 @@
 #include <errno.h>
 #include <sys/time.h>
 #include <math.h>
+#include <fcntl.h>
+#include <sys/stat.h>
 
 # define NIL 0
 # define INIT 1
@@ -21,15 +23,11 @@
 # define DIED 4
 # define FORK 5
 
-extern pthread_mutex_t mutex1;
-
 typedef struct t_strct
 {
         pthread_t       thread;
         int             fork[2];
         int             *bfork;
-        pthread_mutex_t *mfork;
-        pthread_mutex_t *access;
         int             id;
         int             timeToDie;
         int             timeToEat;
@@ -39,7 +37,8 @@ typedef struct t_strct
         int             elapsed;
         int             *isDead;
         struct timeval start, end, stamp;
-        //struct t_strct        *next;
+	//sem_t		*semFork;
+	//sem_t		*semPrint;
 }       s_strct;
 
 //UTILS
@@ -50,12 +49,12 @@ char	*ft_strdup(char *s1);
 
 //INIT
 int     setforks(s_strct *philo, int STATUS);
-int	distributeForks(s_strct *philo, int *bfork, pthread_mutex_t *mfork);
+int	distributeForks(s_strct *philo, int *bfork);
 s_strct *init(char **input, s_strct *philo);
 
 //MAIN
 int	checkerror(char **input);
-int	threadJoin(int nOfThreads, pthread_t *thread);
+int	threadJoin(int nOfThreads, pthread_t *thread, void **ret);
 int	threadCreate(int nOfThreads, pthread_t *thread, s_strct *arg);
 int	initiateThread(s_strct *philo, int nbrPhilos);
 int	main(int argc, char **argv);
