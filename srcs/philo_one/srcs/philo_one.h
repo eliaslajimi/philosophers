@@ -38,7 +38,9 @@ typedef struct t_strct
         int             nbrPhilos;
         int             elapsed;
         int             *isDead;
-        struct timeval start, end, stamp;
+	int		*queue;
+        struct timeval start, end;
+        struct timeval *stamp;
         //struct t_strct        *next;
 }       s_strct;
 
@@ -50,6 +52,7 @@ char	*ft_strdup(char *s1);
 
 //INIT
 int     setforks(s_strct *philo, int STATUS);
+void	setqueue(s_strct *philo, int status);
 int	distributeForks(s_strct *philo, int *bfork, pthread_mutex_t *mfork);
 s_strct *init(char **input, s_strct *philo);
 

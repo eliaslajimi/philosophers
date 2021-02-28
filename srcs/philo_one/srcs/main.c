@@ -19,7 +19,9 @@ int checkerror(char **input)
         i = 1;
         while(input[i] && ft_atoi(input[i]) >= 0)
                 i++;
-        return ((i < 4) || (i > 5));
+	printf("%d\n", i);
+	fflush(stdout);
+        return ((i < 5) || (i > 6));
 }
 
 int	threadJoin(int nOfThreads, pthread_t *thread)
@@ -58,9 +60,11 @@ int	threadCreate(int nOfThreads, pthread_t *thread, s_strct *arg)
 
 void	freeStruct(s_strct *philo)
 {
+	free(philo->isDead);
+	free(philo->stamp);
 	free(philo->mfork);
 	free(philo->bfork);
-	free(philo->isDead);
+	free(philo->queue);
 	free(philo);
 }
 
@@ -70,7 +74,6 @@ int	initiateThread(s_strct *philo, int nbrPhilos)
 	pthread_t	thread[nbrPhilos];
 
 	ret = threadCreate(nbrPhilos, &thread[0], philo);
-	//threadDetach(nbrPhilos, &thread[0]);
 	threadJoin(nbrPhilos, &thread[0]);
 	freeStruct(philo);
 	return (ret);

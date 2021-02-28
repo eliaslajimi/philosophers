@@ -9,7 +9,7 @@ FILES =	init.c\
 SRC = $(addprefix srcs/, $(FILES))
 DIR = ./srcs
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -g 
 HEADR = srcs/philo_one.h
 TARGET = philo_one 
 RM = rm

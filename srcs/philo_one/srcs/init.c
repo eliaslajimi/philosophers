@@ -44,7 +44,9 @@ s_strct *init(char **input, s_strct *philo)
 	int		i;
 	int		*bfork;
 	int		*isDead;
+	int		*queue;
 	int		nbrPhilos;
+	struct timeval	*stamp;
 	pthread_mutex_t	*mutex2;
 
 	i = 0;
@@ -52,6 +54,8 @@ s_strct *init(char **input, s_strct *philo)
 	*isDead = 0;
 	nbrPhilos = ft_atoi(input[1]);
 	bfork = malloc((ft_atoi(input[1]) + 1) * 4);
+	stamp = malloc(sizeof(struct timeval));
+	queue = malloc((ft_atoi(input[1])) * 4);
 	mutex2 = malloc((ft_atoi(input[1]) + 1) * sizeof(pthread_mutex_t));
 	philo = malloc(sizeof(s_strct) * (nbrPhilos + 1));
 	while (i < nbrPhilos)	
@@ -63,11 +67,15 @@ s_strct *init(char **input, s_strct *philo)
 		philo[i].timeToSleep = ft_atoi(input[4]);
 		philo[i].nbrOfEat = ft_atoi(input[5]);
 		philo[i].isDead = isDead;
+		philo[i].queue = queue;
 		philo[i].mfork = &mutex2[0];
+		philo[i].stamp = stamp;
 		pthread_mutex_init(&philo[i].mfork[i], NULL);
 		distributeForks(&philo[i], &bfork[0], &mutex2[0]);
 		i++;
 	}
+	gettimeofday(stamp, NULL);
 	setforks(&philo[0], INIT);
+	setqueue(&philo[0], INIT);
 	return (&philo[0]);
 }
