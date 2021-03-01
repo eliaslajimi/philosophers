@@ -22,40 +22,6 @@ int checkerror(char **input)
         return ((i < 5) || (i > 6));
 }
 
-int	threadJoin(int nOfThreads, pthread_t *thread)
-{
-	static int i;
-
-	while (i < nOfThreads)
-		if (pthread_join(thread[i++], NULL))
-			return (-1);
-	return (0);
-}
-
-int	threadDetach(int nOfThreads, pthread_t *thread)
-{
-	static int i;
-
-	while (i < nOfThreads)
-		pthread_detach(thread[i++]);
-	return (0);
-}
-
-int	threadCreate(int nOfThreads, pthread_t *thread, s_strct *arg)
-{
-	static int	i;
-	static int	ret;
-
-	while (i < nOfThreads)
-	{
-		usleep(1000);
-		if ((ret = pthread_create(&thread[i], NULL, threadProc, (void*)&arg[i])))
-			return (ret);
-		i++;
-	}
-	return (ret);
-}
-
 void	freeStruct(s_strct *philo)
 {
 	free(philo->isDead);
@@ -64,17 +30,6 @@ void	freeStruct(s_strct *philo)
 	free(philo->bfork);
 	free(philo->queue);
 	free(philo);
-}
-
-int	initiateThread(s_strct *philo, int nbrPhilos)
-{
-	static int	ret;
-	pthread_t	thread[nbrPhilos];
-
-	ret = threadCreate(nbrPhilos, &thread[0], philo);
-	threadJoin(nbrPhilos, &thread[0]);
-	freeStruct(philo);
-	return (ret);
 }
 
 int	main(int argc, char **argv)

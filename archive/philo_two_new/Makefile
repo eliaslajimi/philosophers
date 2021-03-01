@@ -1,6 +1,5 @@
 FILES =	init.c\
 	main.c\
-	philo.c\
 	thread.c\
 	utils/ft_atoi.c\
 	utils/ft_itoa.c\
@@ -10,7 +9,7 @@ FILES =	init.c\
 SRC = $(addprefix srcs/, $(FILES))
 DIR = ./srcs
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -g 
+FLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 HEADR = srcs/philo_one.h
 TARGET = philo_one 
 RM = rm

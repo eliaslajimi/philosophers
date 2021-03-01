@@ -1,5 +1,5 @@
-#ifndef _PHILO_ONE_H
-# define _PHILO_ONE_H
+#ifndef _PHILO_TWO_H
+# define _PHILO_TWO_H
 
 #include <pthread.h>
 #include <stdio.h>
@@ -10,6 +10,9 @@
 #include <errno.h>
 #include <sys/time.h>
 #include <math.h>
+#include <semaphore.h>
+#include <fcntl.h>
+#include <sys/stat.h>
 
 # define NIL 0
 # define INIT 1
@@ -20,29 +23,31 @@
 # define THINKING 3
 # define DIED 4
 # define FORK 5
-
-extern pthread_mutex_t mutex1;
+# define SEM_FORKS "/forks"
+# define SEM_PRINT "/print"
+# define SEM_THREAD "/thread"
 
 typedef struct t_strct
 {
-	pthread_t       thread;
-	int             fork[2];
-	int             *bfork;
-	pthread_mutex_t *mfork;
-	pthread_mutex_t *access;
-	int             id;
-	int             timeToDie;
-	int             timeToEat;
-	int             timeToSleep;
-	int             nbrOfEat;
-	int             nbrPhilos;
-	int             elapsed;
-	int             *isDead;
+        pthread_t       thread;
+        int             fork[2];
+        int             *bfork;
+        int             id;
+        int             timeToDie;
+        int             timeToEat;
+        int             timeToSleep;
+        int             nbrOfEat;
+        int             nbrPhilos;
+        int             elapsed;
+        int             *isDead;
 	int		*queue;
-	struct timeval start, end;
-	struct timeval *stamp;
+	sem_t		*semFork;
+	sem_t		*semPrint;
+	sem_t		*semThread;
+        struct timeval 	start, end;
+	struct timeval 	*stamp;
 }       s_strct;
-	
+
 //UTILS
 char	*ft_itoa(int n);
 int	ft_atoi(char *nptr);
@@ -52,8 +57,7 @@ char	*ft_strdup(char *s1);
 //INIT
 int     setforks(s_strct *philo, int STATUS);
 void	setqueue(s_strct *philo, int status);
-int	distributeForks(s_strct *philo, int *bfork, pthread_mutex_t *mfork);
-void	freeStruct(s_strct *philo);
+int	distributeForks(s_strct *philo, int *bfork);
 s_strct *init(char **input, s_strct *philo);
 
 //MAIN
@@ -64,7 +68,7 @@ int	initiateThread(s_strct *philo, int nbrPhilos);
 int	main(int argc, char **argv);
 
 //THREAD
-int	initMutex(s_strct *philo);
+//int	initMutex(s_strct *philo);
 int	initProc(s_strct **philo, int *lfork, int *rfork, void *arg);
 void	*threadProc(void *arg);
 #endif
