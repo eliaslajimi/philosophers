@@ -3,13 +3,13 @@
 void printError(int ret)
 {
 	if (ret == EAGAIN)
-		printf("insufficient ressources to create thread\n");
+		ft_putstr_fd("insufficient ressources to create thread\n", 1);
 	if (ret == EINVAL)
-		printf("invalid settings in attribut during thread initialization\n");
+		ft_putstr_fd("invalid settings in attribut during thread initialization\n", 1);
 	if (ret == EPERM)
-		printf("No permission to set scheduling policy specified by attribute during thread initialization\n");
+		ft_putstr_fd("No permission to set scheduling policy specified by attribute during thread initialization\n", 1);
 	else 
-		printf("else\n");
+		ft_putstr_fd("else\n", 1);
 }
 
 int checkerror(char **input)
@@ -19,8 +19,6 @@ int checkerror(char **input)
         i = 1;
         while(input[i] && ft_atoi(input[i]) >= 0)
                 i++;
-	printf("%d\n", i);
-	fflush(stdout);
         return ((i < 5) || (i > 6));
 }
 

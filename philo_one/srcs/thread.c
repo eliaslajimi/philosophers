@@ -50,33 +50,25 @@ void	printMessage(s_strct *philo, int status)
 
 int	checkTime(s_strct *philo)
 {
-	//pthread_mutex_lock(&mutex4);
+	int ret;
+
+	pthread_mutex_lock(&mutex4);
+	ret = 0;
 	if (!*philo->isDead)
 	{
 		gettimeofday(&philo->end, NULL);
 		philo->elapsed = (int)((philo->end.tv_usec / 1000) + (philo->end.tv_sec * 1000))\
 		       	- ((philo->start.tv_usec / 1000) + (philo->start.tv_sec * 1000));
-		//printf("time elapsed is %d\n", philo->elapsed);
 		if (philo->elapsed > philo->timeToDie)
 		{
-			printf("elapsed is %d\n", philo->elapsed);
-			fflush(stdout);
 			*philo->isDead = 1;
-			pthread_mutex_unlock(&mutex1);
-			//usleep((philo->timeToEat + philo->timeToSleep) * 1000);
 			printMessage(philo, DIED);
-			return (-1);
 		}
 	}
-	if (*philo->isDead)
-	{
-		if (philo->nbrOfEat)
-			return (0);
-		pthread_mutex_unlock(&mutex1);
-		return (-1);
-	}
-	//pthread_mutex_unlock(&mutex4);
-	return (0);
+	if (*philo->isDead || philo->nbrOfEat == 0)
+		ret = -1;
+	pthread_mutex_unlock(&mutex4);
+	return (ret);
 }
 
 int	callFork(s_strct *philo, int status)
@@ -124,41 +116,7 @@ int queue(s_strct *philo)
 		i++;
 	}
 	i = philo->id;
-	return ((philo->queue[i] == ret));// || ret == -1);
-//	static int n;
-//	static int c;
-//	int ret;
-//
-//	ret = 0;
-//	if (!n)
-//		n++;
-//	if (n%2)
-//	{
-//		if ((philo->id+1)%2)
-//		{
-//			if (c)
-//			{
-//				n++;
-//				c = 0;
-//			}
-//			c++;
-//			ret = 1;
-//		}
-//	}
-//	else
-//	{
-//		if (!(philo->id+1)%2)
-//		{
-//			if (c)
-//			{
-//				n++;
-//				c = 0;
-//			}
-//			c++;
-//			ret = 1;
-//		}       
-//	}
-	//return (ret);
+	return ((philo->queue[i] == ret));
 }
 
 int isWaiting(s_strct **philo)
@@ -186,16 +144,10 @@ int isWaiting(s_strct **philo)
 
 int isSleeping(int sleep)
 {
-//	struct timeval before, after;
-	int i = sleep/200;
-	//gettimeofday(&before, NULL);
+	int i =
+	i  = sleep/200;
 	while (i--)
 		usleep(155);
-	//gettimeofday(&after, NULL);
-	///int elapsed = (int)((after.tv_usec / 1000) + (after.tv_sec * 1000))\
-		       	- ((before.tv_usec / 1000) + (before.tv_sec * 1000));
-	//printf("time sleeping is: %d\n", elapsed);
-	//fflush(stdout);
 	return (0);
 }
 
@@ -217,8 +169,6 @@ void	*threadProc(void *arg)
 		printMessage(philo, FORK);
 		pthread_mutex_lock(&philo->mfork[lfork]);
 		pthread_mutex_lock(&philo->mfork[rfork]);
-//		if (philo->nbrOfEat > 0)
-//			philo->nbrOfEat--;
 		printMessage(philo, EATING);
 		if (checkTime(philo))
 		{
@@ -233,6 +183,8 @@ void	*threadProc(void *arg)
 		pthread_mutex_lock(&mutex2);
 		setforks(philo, FREE);
 		pthread_mutex_unlock(&mutex2);
+		if (philo->nbrOfEat > 0)
+			philo->nbrOfEat--;
 		printMessage(philo, SLEEPING);
 		isSleeping(philo->timeToSleep * 1000);
 		if (checkTime(philo))

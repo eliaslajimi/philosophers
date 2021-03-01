@@ -65,7 +65,10 @@ s_strct *init(char **input, s_strct *philo)
 		philo[i].timeToDie = ft_atoi(input[2]);
 		philo[i].timeToEat = ft_atoi(input[3]);
 		philo[i].timeToSleep = ft_atoi(input[4]);
-		philo[i].nbrOfEat = ft_atoi(input[5]);
+		if (ft_atoi(input[5]))
+			philo[i].nbrOfEat = ft_atoi(input[5]);
+		else 
+			philo[i].nbrOfEat = -1;
 		philo[i].isDead = isDead;
 		philo[i].queue = queue;
 		philo[i].mfork = &mutex2[0];
