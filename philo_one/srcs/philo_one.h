@@ -26,13 +26,6 @@ extern pthread_mutex_t mutex2;
 extern pthread_mutex_t mutex3; 
 extern pthread_mutex_t mutex4; 
 
-//mutex1 = PTHREAD_MUTEX_INITIALIZER;
-//mutex3 = PTHREAD_MUTEX_INITIALIZER;
-//mutex4 = PTHREAD_MUTEX_INITIALIZER;
-//extern pthread_mutex_t mutex1; 
-//extern pthread_mutex_t mutex2; 
-
-
 typedef struct t_strct
 {
         pthread_t       thread;
