@@ -22,49 +22,59 @@
 # define FORK 5
 
 extern pthread_mutex_t mutex1;
+extern pthread_mutex_t mutex2;
+extern pthread_mutex_t mutex3; 
+extern pthread_mutex_t mutex4; 
+
+//mutex1 = PTHREAD_MUTEX_INITIALIZER;
+//mutex3 = PTHREAD_MUTEX_INITIALIZER;
+//mutex4 = PTHREAD_MUTEX_INITIALIZER;
+//extern pthread_mutex_t mutex1; 
+//extern pthread_mutex_t mutex2; 
+
 
 typedef struct t_strct
 {
-	pthread_t       thread;
-	int             fork[2];
-	int             *bfork;
-	pthread_mutex_t *mfork;
-	pthread_mutex_t *access;
-	int             id;
-	int             timeToDie;
-	int             timeToEat;
-	int             timeToSleep;
-	int             nbrOfEat;
-	int             nbrPhilos;
-	int             elapsed;
-	int             *isDead;
-	int		*queue;
-	struct timeval start, end;
-	struct timeval *stamp;
+        pthread_t       thread;
+        int             fork[2];
+        int             *bfork;
+        pthread_mutex_t *mfork;
+        pthread_mutex_t *access;
+        int             id;
+        int             timetodie;
+        int             timetoeat;
+        int             timetosleep;
+        int             nbrofeat;
+        int             nbrphilos;
+        int             elapsed;
+        int             *isdead;
+        int             *queue;
+        struct timeval start, end;
+        struct timeval *stamp;
 }       s_strct;
-	
+
 //UTILS
-char	*ft_itoa(int n);
-int	ft_atoi(char *nptr);
-void	ft_putstr_fd(char *s, int fd);
-char	*ft_strdup(char *s1);
+char    *ft_itoa(int n);
+int     ft_atoi(char *nptr);
+void    ft_putstr_fd(char *s, int fd);
+char    *ft_strdup(char *s1);
 
 //INIT
 int     setforks(s_strct *philo, int STATUS);
-void	setqueue(s_strct *philo, int status);
-int	distributeForks(s_strct *philo, int *bfork, pthread_mutex_t *mfork);
-void	freeStruct(s_strct *philo);
-s_strct *init(char **input, s_strct *philo);
+void    setqueue(s_strct *philo, int status);
+int     distributeForks(s_strct *philo, int *bfork, pthread_mutex_t *mfork);
+void    freestruct(s_strct *philo);
+s_strct *init(char **input, s_strct *philo, int i, int *isdead);
 
 //MAIN
-int	checkerror(char **input);
-int	threadJoin(int nOfThreads, pthread_t *thread);
-int	threadCreate(int nOfThreads, pthread_t *thread, s_strct *arg);
-int	initiateThread(s_strct *philo, int nbrPhilos);
-int	main(int argc, char **argv);
+int     checkerror(char **input);
+int     threadjoin(int nOfThreads, pthread_t *thread);
+int     threadcreate(int nOfThreads, pthread_t *thread, s_strct *arg);
+int     initiatethread(s_strct *philo, int nbrPhilos);
+int     main(int argc, char **argv);
 
 //THREAD
-int	initMutex(s_strct *philo);
-int	initProc(s_strct **philo, int *lfork, int *rfork, void *arg);
-void	*threadProc(void *arg);
+int     initmutex(s_strct *philo);
+int     initproc(s_strct **philo, int *lfork, int *rfork, void *arg);
+void    *threadproc(void *arg);
 #endif
