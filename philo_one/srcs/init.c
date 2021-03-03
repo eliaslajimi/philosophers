@@ -1,41 +1,53 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/03 17:48:48 by user42            #+#    #+#             */
+/*   Updated: 2021/03/03 17:48:54 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_one.h"
 
-int     setforks(s_strct *philo, int status)
+int			setforks(s_strct *philo, int status)
 {
-        int i;
-        int lfork;
+	int i;
+	int lfork;
 	int rfork;
 
-        lfork = philo->fork[0];
-        rfork = philo->fork[1];
-        i = 0;
-        if (status == INIT)
-        {
-                while (i < philo->nbrphilos)
-                        philo->bfork[i++] = 1;
-        }
-        if (status == FREE)
-        {
-                philo->bfork[lfork] = 1;
-                philo->bfork[rfork] = 1;
-        }
-        if (status == TAKEN)
-        {
-                philo->bfork[lfork] = 0;
-                philo->bfork[rfork] = 0;
-        }
-        return ((philo->bfork[lfork] == 1 && philo->bfork[rfork] == 1));
+	lfork = philo->fork[0];
+	rfork = philo->fork[1];
+	i = 0;
+	if (status == INIT)
+	{
+		while (i < philo->nbrphilos)
+			philo->bfork[i++] = 1;
+	}
+	if (status == FREE)
+	{
+		philo->bfork[lfork] = 1;
+		philo->bfork[rfork] = 1;
+	}
+	if (status == TAKEN)
+	{
+		philo->bfork[lfork] = 0;
+		philo->bfork[rfork] = 0;
+	}
+	return ((philo->bfork[lfork] == 1 && philo->bfork[rfork] == 1));
 }
 
-int	distributeforks(s_strct *philo, int *bfork, pthread_mutex_t *mfork)
+int			distributeforks(s_strct *philo, int *bfork, pthread_mutex_t *mfork)
 {
 	if (!philo->id)
 		philo->fork[0] = philo->nbrphilos - 1;
-	else 
+	else
 		philo->fork[0] = philo->id - 1;
 	philo->fork[1] = philo->id;
 	philo->bfork = &bfork[0];
-	return (0);	
+	return (0);
 }
 
 s_strct		*init1(char **input, s_strct *philo)
@@ -61,10 +73,10 @@ s_strct		*init1(char **input, s_strct *philo)
 	return (&philo[0]);
 }
 
-s_strct *init(char **input, s_strct *philo, int i, int *isdead)
+s_strct		*init(char **input, s_strct *philo, int i, int *isdead)
 {
-	int		*bfork;
-	int		*queue;
+	int				*bfork;
+	int				*queue;
 	struct timeval	*stamp;
 	pthread_mutex_t	*mutex2;
 
@@ -72,8 +84,8 @@ s_strct *init(char **input, s_strct *philo, int i, int *isdead)
 	stamp = malloc(sizeof(struct timeval));
 	queue = malloc((ft_atoi(input[1])) * 4);
 	mutex2 = malloc((ft_atoi(input[1]) + 1) * sizeof(pthread_mutex_t));
-	philo = malloc(sizeof(s_strct) * (ft_atoi(input[1])+ 1));
-	while (i < ft_atoi(input[1]))	
+	philo = malloc(sizeof(s_strct) * (ft_atoi(input[1]) + 1));
+	while (i < ft_atoi(input[1]))
 	{
 		init1(input, philo);
 		philo[i].isdead = isdead;

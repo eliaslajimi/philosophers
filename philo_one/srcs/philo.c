@@ -1,31 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/03 18:06:37 by user42            #+#    #+#             */
+/*   Updated: 2021/03/03 18:25:50 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo_one.h"
 
-pthread_mutex_t mutex1 = PTHREAD_MUTEX_INITIALIZER;
-pthread_mutex_t mutex2 = PTHREAD_MUTEX_INITIALIZER;
-pthread_mutex_t mutex3 = PTHREAD_MUTEX_INITIALIZER;
-pthread_mutex_t mutex4 = PTHREAD_MUTEX_INITIALIZER;
+g_pthread_mutex_t g_mutex1 = PTHREAD_MUTEX_INITIALIZER;
+g_pthread_mutex_t g_mutex2 = PTHREAD_MUTEX_INITIALIZER;
+g_pthread_mutex_t g_mutex3 = PTHREAD_MUTEX_INITIALIZER;
+g_pthread_mutex_t g_mutex4 = PTHREAD_MUTEX_INITIALIZER;
 
-int 	initproc(s_strct **philo, int *lfork, int *rfork, void *arg)
+int		initproc(s_strct **philo, int *lfork, int *rfork, void *arg)
 {
-	pthread_mutex_lock(&mutex1);
+	pthread_mutex_lock(&g_mutex1);
 	*philo = (s_strct*)arg;
-	pthread_mutex_unlock(&mutex1);
-	pthread_mutex_lock(&mutex1);
+	pthread_mutex_unlock(&g_mutex1);
+	pthread_mutex_lock(&g_mutex1);
 	*lfork = (*philo)->fork[0];
 	*rfork = (*philo)->fork[1];
 	gettimeofday(&(*philo)->start, NULL);
 	gettimeofday(&(*philo)->end, NULL);
-	pthread_mutex_unlock(&mutex1);
+	pthread_mutex_unlock(&g_mutex1);
 	return (0);
-}
-
-int		elapsed(struct timeval then, struct timeval now)
-{
-	int elapsed;
-
-	elapsed = ((now.tv_usec / 1000) + (now.tv_sec * 1000)) -\
-	((then.tv_usec / 1000) + (then.tv_sec * 1000));
-	return (elapsed);
 }
 
 void	printmessage(s_strct *philo, int status)
@@ -33,7 +36,7 @@ void	printmessage(s_strct *philo, int status)
 	int				i;
 	struct timeval	now;
 
-	pthread_mutex_lock(&mutex3);
+	pthread_mutex_lock(&g_mutex3);
 	gettimeofday(&now, NULL);
 	i = philo->id;
 	if (status == EATING)
@@ -52,14 +55,14 @@ void	printmessage(s_strct *philo, int status)
 		ft_putstr_fd("is thinking\n", 1);
 	if (status == DIED)
 		ft_putstr_fd("died\n", 1);
-	pthread_mutex_unlock(&mutex3);
+	pthread_mutex_unlock(&g_mutex3);
 }
 
 int		checktime(s_strct *philo)
 {
 	int ret;
 
-	pthread_mutex_lock(&mutex4);
+	pthread_mutex_lock(&g_mutex4);
 	ret = 0;
 	if (!*philo->isdead)
 	{
@@ -75,7 +78,7 @@ int		checktime(s_strct *philo)
 	}
 	if (*philo->isdead || philo->nbrofeat == 0)
 		ret = -1;
-	pthread_mutex_unlock(&mutex4);
+	pthread_mutex_unlock(&g_mutex4);
 	return (ret);
 }
 
@@ -83,48 +86,13 @@ int		callfork(s_strct *philo, int status)
 {
 	int i;
 
-	pthread_mutex_lock(&mutex1);
+	pthread_mutex_lock(&g_mutex1);
 	i = setforks(philo, TAKEN);
-	pthread_mutex_unlock(&mutex1);
+	pthread_mutex_unlock(&g_mutex1);
 	return (i);
 }
 
-void	setqueue(s_strct *philo, int status)
-{
-	int i;
 
-	i = 0;
-	if (status == INIT)
-	{
-		while (i < philo->nbrphilos)
-			philo->queue[i++] = gettimeofday(philo->stamp, NULL);
-	}
-}
-
-int		queue(s_strct *philo)
-{
-	int i;
-	int j;
-	int ret;
-
-	i = 0;
-	j = 0;
-	ret = -1;
-	ret = philo->queue[i];
-	while (i < philo->nbrphilos)
-	{
-		while (j < philo->nbrphilos)
-		{
-			if (philo->queue[j] < ret)
-				ret = philo->queue[j];
-			j++;
-		}
-		j = 0;
-		i++;
-	}
-	i = philo->id;
-	return ((philo->queue[i] == ret));
-}
 
 int		iswaiting(s_strct **philo)
 {
@@ -136,7 +104,7 @@ int		iswaiting(s_strct **philo)
 	ret = 1;
 	lfork = (*philo)->fork[0];
 	rfork = (*philo)->fork[1];
-	pthread_mutex_lock(&mutex2);
+	pthread_mutex_lock(&g_mutex2);
 	if (((*philo)->bfork[lfork] == 1 &&\
 	(*philo)->bfork[rfork] == 1 && queue(*philo)))
 	{
@@ -145,73 +113,7 @@ int		iswaiting(s_strct **philo)
 	}
 	if (*((*philo)->isdead))
 		ret = 0;
-	pthread_mutex_unlock(&mutex2);
+	pthread_mutex_unlock(&g_mutex2);
 	return (ret);
-}
-
-int		issleeping(int sleep)
-{
-	//int i;
-
-	//i = sleep / 10;
-	struct timeval then, now;
-	gettimeofday(&then, NULL);
-	gettimeofday(&now, NULL);
-	while (elapsed(then, now) < sleep/1000)
-	{
-		gettimeofday(&now, NULL);
-	}
-	return (0);
-}
-
-int		isliving(s_strct *philo, int lfork, int rfork)
-{
-	printmessage(philo, FORK);
-	pthread_mutex_lock(&philo->mfork[lfork]);
-	pthread_mutex_lock(&philo->mfork[rfork]);
-	printmessage(philo, EATING);
-	if (checktime(philo))
-	{
-		pthread_mutex_unlock(&philo->mfork[lfork]);
-		pthread_mutex_unlock(&philo->mfork[rfork]);
-		return (0);
-	}
-	gettimeofday(&philo->start, NULL);
-	issleeping(philo->timetoeat * 1000);
-	pthread_mutex_unlock(&philo->mfork[lfork]);
-	pthread_mutex_unlock(&philo->mfork[rfork]);
-	pthread_mutex_lock(&mutex2);
-	setforks(philo, FREE);
-	pthread_mutex_unlock(&mutex2);
-	if (philo->nbrofeat > 0)
-		philo->nbrofeat--;
-	printmessage(philo, SLEEPING);
-	issleeping(philo->timetosleep * 1000);
-	if (checktime(philo))
-		return (0);
-	printmessage(philo, THINKING);
-	return (1);
-}
-
-void	*threadproc(void *arg)
-{
-	int			lfork;
-	int			rfork;
-	int			ret;
-	s_strct		*philo;
-
-	ret = 0;
-	initproc(&philo, &lfork, &rfork, arg);
-	if ((philo->id + 1) % 2)
-		usleep(100);
-	while (1)
-	{
-		while (iswaiting(&philo))
-			if (checktime(philo))
-				return (NULL);
-		if (!isliving(philo, lfork, rfork))
-			return (NULL);
-	}
-	return (NULL);
 }
 

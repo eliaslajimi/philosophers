@@ -1,7 +1,9 @@
 FILES =	init.c\
 	main.c\
 	philo.c\
+	philo2.c\
 	thread.c\
+	queue.c\
 	utils/ft_atoi.c\
 	utils/ft_itoa.c\
 	utils/ft_strdup.c\
