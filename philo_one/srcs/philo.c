@@ -6,7 +6,7 @@
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 18:06:37 by user42            #+#    #+#             */
-/*   Updated: 2021/03/03 18:25:50 by user42           ###   ########.fr       */
+/*   Updated: 2021/03/03 19:27:00 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ pthread_mutex_t g_mutex2 = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t g_mutex3 = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_t g_mutex4 = PTHREAD_MUTEX_INITIALIZER;
 
-int		initproc(s_strct **philo, int *lfork, int *rfork, void *arg)
+int		initproc(t_strct **philo, int *lfork, int *rfork, void *arg)
 {
 	pthread_mutex_lock(&g_mutex1);
-	*philo = (s_strct*)arg;
+	*philo = (t_strct*)arg;
 	pthread_mutex_unlock(&g_mutex1);
 	pthread_mutex_lock(&g_mutex1);
 	*lfork = (*philo)->fork[0];
@@ -31,7 +31,7 @@ int		initproc(s_strct **philo, int *lfork, int *rfork, void *arg)
 	return (0);
 }
 
-void	printmessage(s_strct *philo, int status)
+void	printmessage(t_strct *philo, int status)
 {
 	int				i;
 	struct timeval	now;
@@ -58,7 +58,7 @@ void	printmessage(s_strct *philo, int status)
 	pthread_mutex_unlock(&g_mutex3);
 }
 
-int		checktime(s_strct *philo)
+int		checktime(t_strct *philo)
 {
 	int ret;
 
@@ -82,7 +82,7 @@ int		checktime(s_strct *philo)
 	return (ret);
 }
 
-int		callfork(s_strct *philo, int status)
+int		callfork(t_strct *philo, int status)
 {
 	int i;
 
@@ -92,9 +92,7 @@ int		callfork(s_strct *philo, int status)
 	return (i);
 }
 
-
-
-int		iswaiting(s_strct **philo)
+int		iswaiting(t_strct **philo)
 {
 	int			lfork;
 	int			rfork;
@@ -116,4 +114,3 @@ int		iswaiting(s_strct **philo)
 	pthread_mutex_unlock(&g_mutex2);
 	return (ret);
 }
-

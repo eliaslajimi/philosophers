@@ -6,7 +6,7 @@
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 16:29:17 by user42            #+#    #+#             */
-/*   Updated: 2021/03/03 17:44:35 by user42           ###   ########.fr       */
+/*   Updated: 2021/03/03 19:36:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		checkerror(char **input)
 	return ((i < 5) || (i > 6));
 }
 
-void	freestruct(s_strct *philo)
+void	freestruct(t_strct *philo)
 {
 	free(philo->isdead);
 	free(philo->stamp);
@@ -52,7 +52,7 @@ int		main(int argc, char **argv)
 	int			*isdead;
 	static int	i;
 	static int	ret;
-	s_strct		*philo;
+	t_strct		*philo;
 
 	isdead = malloc(4);
 	*isdead = 0;

@@ -6,7 +6,7 @@
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 18:20:35 by user42            #+#    #+#             */
-/*   Updated: 2021/03/03 18:27:31 by user42           ###   ########.fr       */
+/*   Updated: 2021/03/03 19:28:30 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		issleeping(int sleep)
 	return (0);
 }
 
-int		isliving(s_strct *philo, int lfork, int rfork)
+int		isliving(t_strct *philo, int lfork, int rfork)
 {
 	printmessage(philo, FORK);
 	pthread_mutex_lock(&philo->mfork[lfork]);
@@ -69,7 +69,7 @@ void	*threadproc(void *arg)
 	int			lfork;
 	int			rfork;
 	int			ret;
-	s_strct		*philo;
+	t_strct		*philo;
 
 	ret = 0;
 	initproc(&philo, &lfork, &rfork, arg);

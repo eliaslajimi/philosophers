@@ -6,13 +6,13 @@
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 18:25:07 by user42            #+#    #+#             */
-/*   Updated: 2021/03/03 18:26:32 by user42           ###   ########.fr       */
+/*   Updated: 2021/03/03 19:29:27 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-void	setqueue(s_strct *philo, int status)
+void	setqueue(t_strct *philo, int status)
 {
 	int i;
 
@@ -24,7 +24,7 @@ void	setqueue(s_strct *philo, int status)
 	}
 }
 
-int		queue(s_strct *philo)
+int		queue(t_strct *philo)
 {
 	int i;
 	int j;

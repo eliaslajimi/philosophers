@@ -6,13 +6,13 @@
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:49:34 by user42            #+#    #+#             */
-/*   Updated: 2021/03/03 17:54:01 by user42           ###   ########.fr       */
+/*   Updated: 2021/03/03 19:28:46 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-int		initiatethread(s_strct *philo, int nbrphilos)
+int		initiatethread(t_strct *philo, int nbrphilos)
 {
 	static int	ret;
 	pthread_t	thread[nbrphilos];
@@ -42,7 +42,7 @@ int		threaddetach(int nofthreads, pthread_t *thread)
 	return (0);
 }
 
-int		threadcreate(int nofthreads, pthread_t *thread, s_strct *arg)
+int		threadcreate(int nofthreads, pthread_t *thread, t_strct *arg)
 {
 	static int	i;
 	static int	ret;

@@ -6,13 +6,13 @@
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:48:48 by user42            #+#    #+#             */
-/*   Updated: 2021/03/03 17:48:54 by user42           ###   ########.fr       */
+/*   Updated: 2021/03/03 19:25:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-int			setforks(s_strct *philo, int status)
+int			setforks(t_strct *philo, int status)
 {
 	int i;
 	int lfork;
@@ -39,7 +39,7 @@ int			setforks(s_strct *philo, int status)
 	return ((philo->bfork[lfork] == 1 && philo->bfork[rfork] == 1));
 }
 
-int			distributeforks(s_strct *philo, int *bfork, pthread_mutex_t *mfork)
+int			distributeforks(t_strct *philo, int *bfork, pthread_mutex_t *mfork)
 {
 	if (!philo->id)
 		philo->fork[0] = philo->nbrphilos - 1;
@@ -50,7 +50,7 @@ int			distributeforks(s_strct *philo, int *bfork, pthread_mutex_t *mfork)
 	return (0);
 }
 
-s_strct		*init1(char **input, s_strct *philo)
+t_strct		*init1(char **input, t_strct *philo)
 {
 	int nbrphilos;
 	int i;
@@ -73,7 +73,7 @@ s_strct		*init1(char **input, s_strct *philo)
 	return (&philo[0]);
 }
 
-s_strct		*init(char **input, s_strct *philo, int i, int *isdead)
+t_strct		*init(char **input, t_strct *philo, int i, int *isdead)
 {
 	int				*bfork;
 	int				*queue;
@@ -84,7 +84,7 @@ s_strct		*init(char **input, s_strct *philo, int i, int *isdead)
 	stamp = malloc(sizeof(struct timeval));
 	queue = malloc((ft_atoi(input[1])) * 4);
 	mutex2 = malloc((ft_atoi(input[1]) + 1) * sizeof(pthread_mutex_t));
-	philo = malloc(sizeof(s_strct) * (ft_atoi(input[1]) + 1));
+	philo = malloc(sizeof(t_strct) * (ft_atoi(input[1]) + 1));
 	while (i < ft_atoi(input[1]))
 	{
 		init1(input, philo);
