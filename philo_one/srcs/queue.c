@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#inlude "philo_one.c"
+#include "philo_one.h"
 
 void	setqueue(s_strct *philo, int status)
 {

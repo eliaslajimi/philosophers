@@ -21,10 +21,10 @@
 # define DIED 4
 # define FORK 5
 
-extern pthread_mutex_t mutex1;
-extern pthread_mutex_t mutex2;
-extern pthread_mutex_t mutex3; 
-extern pthread_mutex_t mutex4; 
+extern pthread_mutex_t g_mutex1;
+extern pthread_mutex_t g_mutex2;
+extern pthread_mutex_t g_mutex3; 
+extern pthread_mutex_t g_mutex4; 
 
 typedef struct t_strct
 {
@@ -69,5 +69,12 @@ int     main(int argc, char **argv);
 //THREAD
 int     initmutex(s_strct *philo);
 int     initproc(s_strct **philo, int *lfork, int *rfork, void *arg);
+
+//PHILO
 void    *threadproc(void *arg);
+void	printmessage(s_strct *philo, int status);
+int	elapsed(struct timeval then, struct timeval now);
+int	checktime(s_strct *philo);
+int	iswaiting(s_strct **philo);
+
 #endif

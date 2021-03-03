@@ -12,10 +12,10 @@
 
 #include "philo_one.h"
 
-g_pthread_mutex_t g_mutex1 = PTHREAD_MUTEX_INITIALIZER;
-g_pthread_mutex_t g_mutex2 = PTHREAD_MUTEX_INITIALIZER;
-g_pthread_mutex_t g_mutex3 = PTHREAD_MUTEX_INITIALIZER;
-g_pthread_mutex_t g_mutex4 = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t g_mutex1 = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t g_mutex2 = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t g_mutex3 = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t g_mutex4 = PTHREAD_MUTEX_INITIALIZER;
 
 int		initproc(s_strct **philo, int *lfork, int *rfork, void *arg)
 {
