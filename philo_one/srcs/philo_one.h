@@ -6,7 +6,7 @@
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 19:23:32 by user42            #+#    #+#             */
-/*   Updated: 2021/03/03 19:27:50 by user42           ###   ########.fr       */
+/*   Updated: 2021/03/03 19:39:30 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,6 @@ void				printmessage(t_strct *philo, int status);
 int					elapsed(struct timeval then, struct timeval now);
 int					checktime(t_strct *philo);
 int					iswaiting(t_strct **philo);
+int					queue(t_strct *philo);
 
 #endif
