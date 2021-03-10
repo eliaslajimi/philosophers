@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <limits.h>
-# include <errno.h>
+# include <errno.h> 
 # include <sys/time.h>
 # include <math.h>
 
@@ -34,13 +34,16 @@
 # define FORK 5
 
 extern pthread_mutex_t g_mutex1;
-extern pthread_mutex_t g_mutex2;
+extern pthread_mutex_t g_mfork;
+extern pthread_mutex_t g_mliving;
+extern pthread_mutex_t g_mprint;
 extern pthread_mutex_t g_mutex3;
 extern pthread_mutex_t g_mutex4;
 
 typedef struct		s_strct
 {
 	pthread_t		thread;
+	pthread_t		checktime;
 	int				fork[2];
 	int				*bfork;
 	pthread_mutex_t	*mfork;
@@ -81,8 +84,9 @@ int					initproc(t_strct **philo, int *lfork, int *rfork,\
 void				*threadproc(void *arg);
 void				printmessage(t_strct *philo, int status);
 int					elapsed(struct timeval then, struct timeval now);
-int					checktime(t_strct *philo);
+void					*checktime(void *arg);
 int					iswaiting(t_strct **philo);
 int					queue(t_strct *philo);
+int	ft_strlen(char *s);
 
 #endif

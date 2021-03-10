@@ -47,6 +47,7 @@ int		threadcreate(int nofthreads, pthread_t *thread, t_strct *arg)
 	static int	i;
 	static int	ret;
 
+
 	while (i < nofthreads)
 	{
 		usleep(10);
