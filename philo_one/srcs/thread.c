@@ -6,7 +6,7 @@
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:49:34 by user42            #+#    #+#             */
-/*   Updated: 2021/03/03 19:28:46 by user42           ###   ########.fr       */
+/*   Updated: 2021/03/11 17:35:00 by elajimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		threadcreate(int nofthreads, pthread_t *thread, t_strct *arg)
 
 	while (i < nofthreads)
 	{
-		usleep(10);
+		usleep(50);
 		if ((ret = pthread_create(&thread[i], NULL,\
 		threadproc, (void*)&arg[i])))
 			return (ret);

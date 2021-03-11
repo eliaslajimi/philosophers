@@ -6,7 +6,7 @@
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 18:20:35 by user42            #+#    #+#             */
-/*   Updated: 2021/03/03 19:28:30 by user42           ###   ########.fr       */
+/*   Updated: 2021/03/11 19:33:49 by elajimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,8 @@ int		isdead(t_strct *philo, int status)
 	{
 		if (status == TAKEN)
 		{
-			if (philo->id)
-				lfork = philo->id - 1;
-			else 
-				lfork = philo->nbrphilos;
-			rfork = philo->id;
-			pthread_mutex_unlock(&philo->mfork[lfork]);
-			pthread_mutex_unlock(&philo->mfork[rfork]);
+			pthread_mutex_unlock(&philo->mfork[philo->fork[0]]);
+			pthread_mutex_unlock(&philo->mfork[philo->fork[1]]);
 		}
 		return (1);
 	}
@@ -53,33 +48,39 @@ int		issleeping(int sleep)
 	while (elapsed(then, now) < sleep)
 	{
 		gettimeofday(&now, NULL);
+		usleep(100);
 	}
 	return (0);
 }
 
-int		isliving(t_strct *philo, int lfork, int rfork)
+void takefork(t_strct *philo, int status)
+{
+	if (status == TAKEN)
+	{
+		pthread_mutex_lock(&philo->mfork[philo->fork[1]]);
+		pthread_mutex_lock(&philo->mfork[philo->fork[0]]);
+	}
+	if (status == FREE)
+	{
+		pthread_mutex_unlock(&philo->mfork[philo->fork[0]]);
+		pthread_mutex_unlock(&philo->mfork[philo->fork[1]]);
+	}
+}
+
+int		isliving(t_strct *philo)
 {
 	pthread_mutex_lock(&philo->mfork[philo->fork[1]]);
-	pthread_mutex_lock(&philo->mfork[philo->fork[0]]);
 	printmessage(philo, FORK);
+	pthread_mutex_lock(&philo->mfork[philo->fork[0]]);
 	printmessage(philo, FORK);
 	if (isdead(philo, TAKEN))
 		return (0);
-	gettimeofday(&philo->start, NULL);
 	printmessage(philo, EATING);
 	issleeping(philo->timetoeat);
-	//pthread_mutex_lock(&g_mliving);
 	pthread_mutex_unlock(&philo->mfork[philo->fork[0]]);
 	pthread_mutex_unlock(&philo->mfork[philo->fork[1]]);
-	pthread_mutex_unlock(&g_mliving);
-	//pthread_mutex_lock(&g_mliving);
-	if (philo->nbrofeat > 0)
-		philo->nbrofeat--;
-	//pthread_mutex_unlock(&g_mliving);
 	printmessage(philo, SLEEPING);
 	issleeping(philo->timetosleep);
-	if (isdead(philo, NIL))
-		return (0);
 	printmessage(philo, THINKING);
 	return (1);
 }
@@ -93,17 +94,25 @@ void	*threadproc(void *arg)
 
 	ret = 0;
 	initproc(&philo, &lfork, &rfork, arg);
+	pthread_create(&philo->checktime, NULL, checktime, (void*)philo);
 	if (!(philo->id%2))
-		usleep(100);
-	pthread_mutex_lock(&g_mprint);
-	usleep(100);
-	gettimeofday(&philo->start, NULL);
-	pthread_mutex_unlock(&g_mprint);
+		usleep(philo->nbrphilos * 200);
 	while (1)
 	{
-		if (!isliving(philo, philo->fork[0], philo->fork[1]))
-			return (NULL);
-		
+		pthread_mutex_lock(&philo->mfork[philo->fork[1]]);
+		pthread_mutex_lock(&philo->mfork[philo->fork[0]]);
+		printmessage(philo, FORK);
+		printmessage(philo, FORK);
+		printmessage(philo, EATING);
+		issleeping(philo->timetoeat);
+		printmessage(philo, SLEEPING);
+		pthread_mutex_unlock(&philo->mfork[philo->fork[0]]);
+		pthread_mutex_unlock(&philo->mfork[philo->fork[1]]);
+		issleeping(philo->timetosleep);
+		printmessage(philo, THINKING);
+		//usleep(100);
+		if (isdead(philo, NIL))
+			return (0);
 	}
 	return (NULL);
 }

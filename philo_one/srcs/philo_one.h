@@ -6,7 +6,7 @@
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 19:23:32 by user42            #+#    #+#             */
-/*   Updated: 2021/03/03 19:39:30 by user42           ###   ########.fr       */
+/*   Updated: 2021/03/11 16:53:50 by elajimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct		s_strct
 	int				elapsed;
 	int				*isdead;
 	int				*queue;
+	int				haseaten;
 	struct timeval	start;
 	struct timeval	end;
 	struct timeval	*stamp;

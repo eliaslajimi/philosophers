@@ -6,7 +6,7 @@
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 18:06:37 by user42            #+#    #+#             */
-/*   Updated: 2021/03/03 19:27:00 by user42           ###   ########.fr       */
+/*   Updated: 2021/03/11 19:27:17 by elajimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int		initproc(t_strct **philo, int *lfork, int *rfork, void *arg)
 	gettimeofday(&(*philo)->end, NULL);
 	pthread_mutex_unlock(&g_minit);
 	pthread_mutex_lock(&g_minit);
-	pthread_create(&(*philo)->checktime, NULL, checktime, (void*)philo);
 	pthread_mutex_unlock(&g_minit);
 	return (0);
 }
@@ -42,30 +41,32 @@ void	printmessage(t_strct *philo, int status)
 	static int	nil;
 	struct timeval	now;
 
-	pthread_mutex_lock(&g_mprint);
 	gettimeofday(&now, NULL);
 	i = philo->id;
-
-	if (status == NIL)
-		nil = 1;
 	if (nil)
 		return ;
+	pthread_mutex_lock(&g_mprint);
 	if (status == EATING)
-		philo->queue[i] = elapsed(*philo->stamp, now);
-	ft_putstr_fd(ft_itoa(elapsed(*philo->stamp, now)), 1);
-	ft_putstr_fd(" ", 1);
-	ft_putstr_fd(ft_itoa(philo->id), 1);
-	ft_putstr_fd(" ", 1);
-	if (status == FORK)
+		philo->haseaten = 1;
+	if (!nil)
+	{
+		ft_putstr_fd(ft_itoa(elapsed(*philo->stamp, now)), 1);
+		ft_putstr_fd(" ", 1);
+		ft_putstr_fd(ft_itoa(philo->id), 1);
+		ft_putstr_fd(" ", 1);
+	}
+	if (status == FORK && !nil)
 		write(1, "has taken a fork\n", ft_strlen("has taken a fork\n"));
-	if (status == EATING)
+	else if (status == EATING && !nil)
 		write(1, "is eating\n", ft_strlen("is eating\n"));
-	if (status == SLEEPING)
+	else if (status == SLEEPING && !nil)
 		write(1, "is sleeping\n", ft_strlen("is sleeping\n"));
-	if (status == THINKING)
+	else if (status == THINKING && !nil)
 		write(1, "is thinking\n", ft_strlen("is thinking\n"));
-	if (status == DIED)
+	else if (status == DIED && !nil)
 		write(1, "died\n", ft_strlen("died\n"));
+	if (status == DIED)
+		nil = 1;
 	pthread_mutex_unlock(&g_mprint);
 }
 
@@ -79,6 +80,16 @@ void	*checktime(void *arg)
 	while (1)
 	{
 		pthread_mutex_lock(&g_mtime);
+		if (philo->haseaten)
+		{
+			philo->haseaten = 0;
+			gettimeofday(&philo->start, NULL);
+			if (philo->nbrofeat > 0)
+				philo->nbrofeat--;
+		}
+		pthread_mutex_unlock(&g_mtime);
+		usleep(1000);
+		pthread_mutex_lock(&g_mtime);
 		if (!*philo->isdead)
 		{
 			gettimeofday(&philo->end, NULL);
@@ -89,12 +100,13 @@ void	*checktime(void *arg)
 			{
 				*philo->isdead = 1;
 				printmessage(philo, DIED);
-				printmessage(philo, NIL);
+				//printmessage(philo, NIL);
 				pthread_mutex_unlock(&g_mtime);
 				return (0);
 			}
 		}
 		pthread_mutex_unlock(&g_mtime);
+		usleep(2000);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:48:48 by user42            #+#    #+#             */
-/*   Updated: 2021/03/03 19:25:56 by user42           ###   ########.fr       */
+/*   Updated: 2021/03/11 17:01:28 by elajimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ t_strct		*init1(char **input, t_strct *philo)
 	while (i < nbrphilos)
 	{
 		philo[i].id = i;
+		philo[i].haseaten = 0;
 		philo[i].nbrphilos = nbrphilos;
 		philo[i].timetodie = ft_atoi(input[2]);
 		philo[i].timetoeat = ft_atoi(input[3]);
