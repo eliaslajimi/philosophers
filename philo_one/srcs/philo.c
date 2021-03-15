@@ -41,29 +41,32 @@ void	printmessage(t_strct *philo, int status)
 	static int	nil;
 	struct timeval	now;
 
+	pthread_mutex_lock(&g_mprint);
 	gettimeofday(&now, NULL);
 	i = philo->id;
-	if (nil)
+	if (nil && !philo->nbrofeat)
+	{
+		pthread_mutex_unlock(&g_mprint);
 		return ;
-	pthread_mutex_lock(&g_mprint);
+	}
 	if (status == EATING)
 		philo->haseaten = 1;
-	if (!nil)
+	if (!nil || philo->nbrofeat)
 	{
 		ft_putstr_fd(ft_itoa(elapsed(*philo->stamp, now)), 1);
 		ft_putstr_fd(" ", 1);
 		ft_putstr_fd(ft_itoa(philo->id), 1);
 		ft_putstr_fd(" ", 1);
 	}
-	if (status == FORK && !nil)
+	if (status == FORK && (!nil || philo->nbrofeat))
 		write(1, "has taken a fork\n", ft_strlen("has taken a fork\n"));
-	else if (status == EATING && !nil)
+	else if (status == EATING && (!nil || philo->nbrofeat))
 		write(1, "is eating\n", ft_strlen("is eating\n"));
-	else if (status == SLEEPING && !nil)
+	else if (status == SLEEPING && (!nil || philo->nbrofeat))
 		write(1, "is sleeping\n", ft_strlen("is sleeping\n"));
-	else if (status == THINKING && !nil)
+	else if (status == THINKING && (!nil || philo->nbrofeat))
 		write(1, "is thinking\n", ft_strlen("is thinking\n"));
-	else if (status == DIED && !nil)
+	else if (status == DIED && (!nil || philo->nbrofeat))
 		write(1, "died\n", ft_strlen("died\n"));
 	if (status == DIED)
 		nil = 1;
@@ -84,8 +87,6 @@ void	*checktime(void *arg)
 		{
 			philo->haseaten = 0;
 			gettimeofday(&philo->start, NULL);
-			if (philo->nbrofeat > 0)
-				philo->nbrofeat--;
 		}
 		pthread_mutex_unlock(&g_mtime);
 		usleep(1000);
@@ -100,7 +101,6 @@ void	*checktime(void *arg)
 			{
 				*philo->isdead = 1;
 				printmessage(philo, DIED);
-				//printmessage(philo, NIL);
 				pthread_mutex_unlock(&g_mtime);
 				return (0);
 			}
@@ -120,26 +120,3 @@ int		callfork(t_strct *philo, int status)
 	pthread_mutex_unlock(&g_minit);
 	return (i);
 }
-
-//int		iswaiting(t_strct **philo)
-//{
-//	int			lfork;
-//	int			rfork;
-//	int			ret;
-//	static int	odd;
-//
-//	ret = 1;
-//	lfork = (*philo)->fork[0];
-//	rfork = (*philo)->fork[1];
-//	pthread_mutex_lock(&g_mutex2);
-//	if (((*philo)->bfork[lfork] == 1 &&\
-//	(*philo)->bfork[rfork] == 1 && queue(*philo)))
-//	{
-//		setforks(*philo, TAKEN);
-//		ret = 0;
-//	}
-//	if (*((*philo)->isdead))
-//		ret = 0;
-//	pthread_mutex_unlock(&g_mutex2);
-//	return (ret);
-//}

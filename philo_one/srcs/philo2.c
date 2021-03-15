@@ -67,24 +67,6 @@ void takefork(t_strct *philo, int status)
 	}
 }
 
-int		isliving(t_strct *philo)
-{
-	pthread_mutex_lock(&philo->mfork[philo->fork[1]]);
-	printmessage(philo, FORK);
-	pthread_mutex_lock(&philo->mfork[philo->fork[0]]);
-	printmessage(philo, FORK);
-	if (isdead(philo, TAKEN))
-		return (0);
-	printmessage(philo, EATING);
-	issleeping(philo->timetoeat);
-	pthread_mutex_unlock(&philo->mfork[philo->fork[0]]);
-	pthread_mutex_unlock(&philo->mfork[philo->fork[1]]);
-	printmessage(philo, SLEEPING);
-	issleeping(philo->timetosleep);
-	printmessage(philo, THINKING);
-	return (1);
-}
-
 void	*threadproc(void *arg)
 {
 	int			lfork;
@@ -104,14 +86,15 @@ void	*threadproc(void *arg)
 		printmessage(philo, FORK);
 		printmessage(philo, FORK);
 		printmessage(philo, EATING);
+		if (philo->nbrofeat > 0)
+			philo->nbrofeat--;
 		issleeping(philo->timetoeat);
 		printmessage(philo, SLEEPING);
 		pthread_mutex_unlock(&philo->mfork[philo->fork[0]]);
 		pthread_mutex_unlock(&philo->mfork[philo->fork[1]]);
 		issleeping(philo->timetosleep);
 		printmessage(philo, THINKING);
-		//usleep(100);
-		if (isdead(philo, NIL))
+		if (isdead(philo, NIL) && !philo->nbrofeat)
 			return (0);
 	}
 	return (NULL);
