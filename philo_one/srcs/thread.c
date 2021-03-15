@@ -6,7 +6,7 @@
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:49:34 by user42            #+#    #+#             */
-/*   Updated: 2021/03/11 17:35:00 by elajimi          ###   ########.fr       */
+/*   Updated: 2021/03/16 00:02:15 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int		threadcreate(int nofthreads, pthread_t *thread, t_strct *arg)
 {
 	static int	i;
 	static int	ret;
-
 
 	while (i < nofthreads)
 	{

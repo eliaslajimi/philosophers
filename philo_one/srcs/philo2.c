@@ -6,7 +6,7 @@
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 18:20:35 by user42            #+#    #+#             */
-/*   Updated: 2021/03/11 19:33:49 by elajimi          ###   ########.fr       */
+/*   Updated: 2021/03/16 00:01:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		issleeping(int sleep)
 	return (0);
 }
 
-void takefork(t_strct *philo, int status)
+void		takefork(t_strct *philo, int status)
 {
 	if (status == TAKEN)
 	{
@@ -81,8 +81,9 @@ void	*threadproc(void *arg)
 		usleep(philo->nbrphilos * 200);
 	while (1)
 	{
-		pthread_mutex_lock(&philo->mfork[philo->fork[1]]);
-		pthread_mutex_lock(&philo->mfork[philo->fork[0]]);
+		//pthread_mutex_lock(&philo->mfork[philo->fork[1]]);
+		//pthread_mutex_lock(&philo->mfork[philo->fork[0]]);
+		takefork(philo, TAKEN);
 		printmessage(philo, FORK);
 		printmessage(philo, FORK);
 		printmessage(philo, EATING);
@@ -90,8 +91,9 @@ void	*threadproc(void *arg)
 			philo->nbrofeat--;
 		issleeping(philo->timetoeat);
 		printmessage(philo, SLEEPING);
-		pthread_mutex_unlock(&philo->mfork[philo->fork[0]]);
-		pthread_mutex_unlock(&philo->mfork[philo->fork[1]]);
+		takefork(philo, FREE);
+		//pthread_mutex_unlock(&philo->mfork[philo->fork[0]]);
+		//pthread_mutex_unlock(&philo->mfork[philo->fork[1]]);
 		issleeping(philo->timetosleep);
 		printmessage(philo, THINKING);
 		if (isdead(philo, NIL) && !philo->nbrofeat)

@@ -6,7 +6,7 @@
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 18:06:37 by user42            #+#    #+#             */
-/*   Updated: 2021/03/11 19:27:17 by elajimi          ###   ########.fr       */
+/*   Updated: 2021/03/16 00:08:49 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,22 @@ void	printmessage(t_strct *philo, int status)
 	pthread_mutex_unlock(&g_mprint);
 }
 
+int	isdead(t_strct *philo)
+{
+	gettimeofday(&philo->end, NULL);
+	philo->elapsed = (int)((philo->end.tv_usec / 1000) +\
+	(philo->end.tv_sec * 1000)) - ((philo->start.tv_usec / 1000) +\
+	(philo->start.tv_sec * 1000));
+	if (philo->elapsed > philo->timetodie)
+	{
+		*philo->isdead = 1;
+		printmessage(philo, DIED);
+		pthread_mutex_unlock(&g_mtime);
+		return (1);
+	}
+	return (0);
+}
+
 void	*checktime(void *arg)
 {
 	t_strct	*philo;
@@ -92,19 +108,19 @@ void	*checktime(void *arg)
 		usleep(1000);
 		pthread_mutex_lock(&g_mtime);
 		if (!*philo->isdead)
-		{
-			gettimeofday(&philo->end, NULL);
-			philo->elapsed = (int)((philo->end.tv_usec / 1000) +\
-			(philo->end.tv_sec * 1000)) - ((philo->start.tv_usec / 1000) +\
-			(philo->start.tv_sec * 1000));
-			if (philo->elapsed > philo->timetodie)
-			{
-				*philo->isdead = 1;
-				printmessage(philo, DIED);
-				pthread_mutex_unlock(&g_mtime);
-				return (0);
-			}
-		}
+			if (isdead(philo))
+				return (1);				
+////			gettimeofday(&philo->end, NULL);
+//			philo->elapsed = (int)((philo->end.tv_usec / 1000) +\
+//			(philo->end.tv_sec * 1000)) - ((philo->start.tv_usec / 1000) +\
+//			(philo->start.tv_sec * 1000));
+//			if (philo->elapsed > philo->timetodie)
+//			{
+//				*philo->isdead = 1;
+//				printmessage(philo, DIED);
+//				pthread_mutex_unlock(&g_mtime);
+//				return (0);
+//			}
 		pthread_mutex_unlock(&g_mtime);
 		usleep(2000);
 	}
