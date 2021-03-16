@@ -6,7 +6,7 @@
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:49:34 by user42            #+#    #+#             */
-/*   Updated: 2021/03/16 00:02:15 by user42           ###   ########.fr       */
+/*   Updated: 2021/03/16 16:55:57 by elajimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int		initiatethread(t_strct *philo, int nbrphilos)
 	static int	ret;
 	pthread_t	thread[nbrphilos];
 
-	ret = threadcreate(nbrphilos, &thread[0], philo);
+	threaddetach(nbrphilos, &thread[0]);
+	threadcreate(nbrphilos, &thread[0], philo);
 	threadjoin(nbrphilos, &thread[0]);
 	freestruct(philo);
 	return (ret);
@@ -46,6 +47,7 @@ int		threadcreate(int nofthreads, pthread_t *thread, t_strct *arg)
 {
 	static int	i;
 	static int	ret;
+	pthread_t	timer;
 
 	while (i < nofthreads)
 	{
@@ -55,5 +57,6 @@ int		threadcreate(int nofthreads, pthread_t *thread, t_strct *arg)
 			return (ret);
 		i++;
 	}
+	ret = pthread_create(&timer, NULL, checktime, (void*)arg);
 	return (ret);
 }

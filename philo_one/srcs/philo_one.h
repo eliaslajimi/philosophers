@@ -6,7 +6,7 @@
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 19:23:32 by user42            #+#    #+#             */
-/*   Updated: 2021/03/11 16:53:50 by elajimi          ###   ########.fr       */
+/*   Updated: 2021/03/16 17:06:05 by elajimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <limits.h>
-# include <errno.h> 
+# include <errno.h>
 # include <sys/time.h>
 # include <math.h>
 
@@ -85,9 +85,11 @@ int					initproc(t_strct **philo, int *lfork, int *rfork,\
 void				*threadproc(void *arg);
 void				printmessage(t_strct *philo, int status);
 int					elapsed(struct timeval then, struct timeval now);
-void					*checktime(void *arg);
+void				*checktime(void *arg);
 int					iswaiting(t_strct **philo);
 int					queue(t_strct *philo);
-int	ft_strlen(char *s);
+int					ft_strlen(char *s);
+int					dead(t_strct *philo);
+int					threaddetach(int nofthreads, pthread_t *thread);
 
 #endif

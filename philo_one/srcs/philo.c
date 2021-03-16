@@ -6,7 +6,7 @@
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 18:06:37 by user42            #+#    #+#             */
-/*   Updated: 2021/03/16 00:08:49 by user42           ###   ########.fr       */
+/*   Updated: 2021/03/16 17:10:03 by elajimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,19 @@ int		initproc(t_strct **philo, int *lfork, int *rfork, void *arg)
 	gettimeofday(&(*philo)->start, NULL);
 	gettimeofday(&(*philo)->end, NULL);
 	pthread_mutex_unlock(&g_minit);
-	pthread_mutex_lock(&g_minit);
-	pthread_mutex_unlock(&g_minit);
+	if (!((*philo)->id % 2))
+		usleep((*philo)->nbrphilos * 200);
 	return (0);
 }
 
-void 	writing(t_strct *philo, int status, int nil, struct timeval now)
+void	writing(t_strct *philo, int status, int nil, struct timeval now)
 {
 	if (!nil || (philo->nbrofeat > 0))
 	{
 		ft_putstr_fd(ft_itoa(elapsed(*philo->stamp, now)), 1);
-		ft_putstr_fd(" ", 1);
-		ft_putstr_fd(ft_itoa(philo->id), 1);
-		ft_putstr_fd(" ", 1);
+		write(1, " Philosopher ", ft_strlen(" Philosopher "));
+		write(1, ft_itoa(philo->id), ft_strlen(ft_itoa(philo->id)));
+		write(1, " ", 1);
 	}
 	if (status == FORK && (!nil || philo->nbrofeat))
 		write(1, "has taken a fork\n", ft_strlen("has taken a fork\n"));
@@ -58,8 +58,8 @@ void 	writing(t_strct *philo, int status, int nil, struct timeval now)
 
 void	printmessage(t_strct *philo, int status)
 {
-	int		i;
-	static int	nil;
+	int				i;
+	static int		nil;
 	struct timeval	now;
 
 	pthread_mutex_lock(&g_mprint);
@@ -75,29 +75,12 @@ void	printmessage(t_strct *philo, int status)
 		philo->haseaten = 1;
 	}
 	writing(philo, status, nil, now);
-//	if (!nil || (philo->nbrofeat > 0))
-//	{
-//		ft_putstr_fd(ft_itoa(elapsed(*philo->stamp, now)), 1);
-//		ft_putstr_fd(" ", 1);
-//		ft_putstr_fd(ft_itoa(philo->id), 1);
-//		ft_putstr_fd(" ", 1);
-//	}
-//	if (status == FORK && (!nil || philo->nbrofeat))
-//		write(1, "has taken a fork\n", ft_strlen("has taken a fork\n"));
-//	else if (status == EATING && (!nil || (philo->nbrofeat > 0)))
-//		write(1, "is eating\n", ft_strlen("is eating\n"));
-//	else if (status == SLEEPING && (!nil || (philo->nbrofeat > 0)))
-//		write(1, "is sleeping\n", ft_strlen("is sleeping\n"));
-//	else if (status == THINKING && (!nil || (philo->nbrofeat > 0)))
-//		write(1, "is thinking\n", ft_strlen("is thinking\n"));
-//	else if (status == DIED && (!nil || (philo->nbrofeat > 0)))
-//		write(1, "died\n", ft_strlen("died\n"));
 	if (status == DIED)
 		nil = 1;
 	pthread_mutex_unlock(&g_mprint);
 }
 
-int	dead(t_strct *philo)
+int		dead(t_strct *philo)
 {
 	gettimeofday(&philo->end, NULL);
 	philo->elapsed = (int)((philo->end.tv_usec / 1000) +\
@@ -108,36 +91,6 @@ int	dead(t_strct *philo)
 		*philo->isdead = 1;
 		printmessage(philo, DIED);
 		return (1);
-	}
-	return (0);
-}
-
-void	*checktime(void *arg)
-{
-	t_strct	*philo;
-	int	ret;
-
-	philo = (t_strct*)arg;
-	ret = 0;
-	while (1)
-	{
-		pthread_mutex_lock(&g_mtime);
-		if (philo->haseaten)
-		{
-			philo->haseaten = 0;
-			gettimeofday(&philo->start, NULL);
-		}
-		pthread_mutex_unlock(&g_mtime);
-		usleep(1000);
-		pthread_mutex_lock(&g_mtime);
-		if (!*philo->isdead)
-			if (dead(philo))
-			{
-				pthread_mutex_unlock(&g_mtime);
-				return (0);				
-			}
-		pthread_mutex_unlock(&g_mtime);
-		usleep(2000);
 	}
 	return (0);
 }

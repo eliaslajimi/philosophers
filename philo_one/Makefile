@@ -4,6 +4,7 @@ FILES =	init.c\
 	philo2.c\
 	thread.c\
 	queue.c\
+	time.c\
 	utils/ft_strlen.c\
 	utils/ft_atoi.c\
 	utils/ft_itoa.c\

@@ -6,7 +6,7 @@
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 18:20:35 by user42            #+#    #+#             */
-/*   Updated: 2021/03/16 00:01:12 by user42           ###   ########.fr       */
+/*   Updated: 2021/03/16 17:06:40 by elajimi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,6 @@ int		isdead(t_strct *philo, int status)
 	return (0);
 }
 
-int		elapsed(struct timeval then, struct timeval now)
-{
-	int elapsed;
-
-	elapsed = ((now.tv_usec / 1000) + (now.tv_sec * 1000)) -\
-	((then.tv_usec / 1000) + (then.tv_sec * 1000));
-	return (elapsed);
-}
-
 int		issleeping(int sleep)
 {
 	struct timeval then;
@@ -53,7 +44,7 @@ int		issleeping(int sleep)
 	return (0);
 }
 
-void		takefork(t_strct *philo, int status)
+void	takefork(t_strct *philo, int status)
 {
 	if (status == TAKEN)
 	{
@@ -72,13 +63,10 @@ void	*threadproc(void *arg)
 	int			lfork;
 	int			rfork;
 	int			ret;
-	t_strct			*philo;
+	t_strct		*philo;
 
 	ret = 0;
 	initproc(&philo, &lfork, &rfork, arg);
-	pthread_create(&philo->checktime, NULL, checktime, (void*)philo);
-	if (!(philo->id%2))
-		usleep(philo->nbrphilos * 200);
 	while (1)
 	{
 		takefork(philo, TAKEN);
