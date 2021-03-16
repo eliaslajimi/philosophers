@@ -81,22 +81,18 @@ void	*threadproc(void *arg)
 		usleep(philo->nbrphilos * 200);
 	while (1)
 	{
-		//pthread_mutex_lock(&philo->mfork[philo->fork[1]]);
-		//pthread_mutex_lock(&philo->mfork[philo->fork[0]]);
 		takefork(philo, TAKEN);
 		printmessage(philo, FORK);
 		printmessage(philo, FORK);
-		printmessage(philo, EATING);
 		if (philo->nbrofeat > 0)
 			philo->nbrofeat--;
+		printmessage(philo, EATING);
 		issleeping(philo->timetoeat);
 		printmessage(philo, SLEEPING);
 		takefork(philo, FREE);
-		//pthread_mutex_unlock(&philo->mfork[philo->fork[0]]);
-		//pthread_mutex_unlock(&philo->mfork[philo->fork[1]]);
 		issleeping(philo->timetosleep);
 		printmessage(philo, THINKING);
-		if (isdead(philo, NIL) && !philo->nbrofeat)
+		if (isdead(philo, NIL) && (philo->nbrofeat <= 0))
 			return (0);
 	}
 	return (NULL);
