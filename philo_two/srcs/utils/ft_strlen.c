@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cmcgahan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: elajimi <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 13:49:30 by cmcgahan          #+#    #+#             */
-/*   Updated: 2019/10/23 14:22:59 by cmcgahan         ###   ########.fr       */
+/*   Created: 2019/10/07 10:32:21 by elajimi           #+#    #+#             */
+/*   Updated: 2021/01/11 19:52:20 by cmcgahan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo_two.h"
 
-void	ft_putchar_fd(char c, int fd)
+int	ft_strlen(char *s)
 {
-	write(fd, &c, 1);
-}
+	int i;
 
-void	ft_putstr_fd(char *s, int fd)
-{
-	if (s)
-	{
-		while (*s)
-		{
-			ft_putchar_fd(*s, fd);
-			s++;
-		}
-	}
+	i = 0;
+	if (s == NULL)
+		return (0);
+	while (s[i] != '\0')
+		i++;
+	return (i);
 }

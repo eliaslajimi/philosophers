@@ -46,6 +46,33 @@ void	freestruct(t_strct *philo)
 	free(philo);
 }
 
+int		setsem(t_strct *philo)
+{
+	static int	i;
+	int		nbrphilos;
+	sem_t		*semfork;
+	sem_t		*semthread;
+	sem_t		*semprint;
+
+	sem_unlink(SEM_FORK);
+	sem_unlink(SEM_PRINT);
+	sem_unlink(SEM_THREAD);
+	semfork = malloc(sizeof(sem_t));
+	semthread = malloc(sizeof(sem_t));
+	semprint = malloc(sizeof(sem_t));
+	semthread = sem_open(SEM_FORK, O_CREAT, 0660, nbrphilos);
+	semprint = sem_open(SEM_PRINT, O_CREAT, 0660, 1);
+	semthread = sem_open(SEM_THREAD, O_CREAT, 0660, 1);
+	while (i < philo[0].nbrphilos)
+	{
+		philo[i].semfork = semfork;
+		philo[i].semprint = semprint;
+		philo[i].semthread = semthread;
+		i++;
+	}
+	return (0);
+}
+
 int		main(int argc, char **argv)
 {
 	int			*isdead;
@@ -58,6 +85,7 @@ int		main(int argc, char **argv)
 	if (checkerror(argv))
 		return (0);
 	philo = init(argv, philo, i, isdead);
+	setsem(philo);
 	ret = initiatethread(philo, ft_atoi(argv[1]));
 	if (ret)
 		printerror(ret);

@@ -6,7 +6,7 @@
 /*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/03 17:48:48 by user42            #+#    #+#             */
-/*   Updated: 2021/03/11 17:01:28 by elajimi          ###   ########.fr       */
+/*   Updated: 2021/03/03 19:25:56 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int			setforks(t_strct *philo, int status)
 	return ((philo->bfork[lfork] == 1 && philo->bfork[rfork] == 1));
 }
 
-int			distributeforks(t_strct *philo, int *bfork)//, pthread_mutex_t *mfork)
+int			distributeforks(t_strct *philo, int *bfork)
 {
 	if (!philo->id)
 		philo->fork[0] = philo->nbrphilos - 1;
@@ -60,13 +60,12 @@ t_strct		*init1(char **input, t_strct *philo)
 	while (i < nbrphilos)
 	{
 		philo[i].id = i;
-		philo[i].haseaten = 0;
 		philo[i].nbrphilos = nbrphilos;
 		philo[i].timetodie = ft_atoi(input[2]);
 		philo[i].timetoeat = ft_atoi(input[3]);
 		philo[i].timetosleep = ft_atoi(input[4]);
 		if (ft_atoi(input[5]))
-			philo[i].nbrofeat = ft_atoi(input[5]) + 1;
+			philo[i].nbrofeat = ft_atoi(input[5]);
 		else
 			philo[i].nbrofeat = -1;
 		i++;
@@ -80,19 +79,6 @@ t_strct		*init(char **input, t_strct *philo, int i, int *isdead)
 	int				*queue;
 	struct timeval	*stamp;
 
-
-	sem_t 			*semfork;
-	sem_t			*semstate;
-	sem_t			*semprint;
-
-	sem_unlink(SEM_FORK);
-	sem_unlink(SEM_STATE);
-	sem_unlink(SEM_PRINT);
-
-	semfork  = sem_open(SEM_FORK, O_CREAT, 0660, ft_atoi(input[1]));
-	semstate = sem_open(SEM_STATE, O_CREAT, 0660, 1);
-	semprint = sem_open(SEM_PRINT, O_CREAT, 0660, 1);
-
 	bfork = malloc((ft_atoi(input[1]) + 1) * 4);
 	stamp = malloc(sizeof(struct timeval));
 	queue = malloc((ft_atoi(input[1])) * 4);
@@ -102,15 +88,12 @@ t_strct		*init(char **input, t_strct *philo, int i, int *isdead)
 		init1(input, philo);
 		philo[i].isdead = isdead;
 		philo[i].queue = queue;
-		philo[i].semfork = semfork;
-		philo[i].semstate = semstate;
-		philo[i].semprint = semprint;
 		philo[i].stamp = stamp;
-		distributeforks(&philo[i], &bfork[0]);///, &mutex2[0]);
+		distributeforks(&philo[i], &bfork[0]);
 		i++;
 	}
-	gettimeofday(stamp, NULL);
 	setforks(&philo[0], INIT);
 	setqueue(&philo[0], INIT);
+	gettimeofday(stamp, NULL);
 	return (&philo[0]);
 }
