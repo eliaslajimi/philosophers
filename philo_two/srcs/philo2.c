@@ -81,7 +81,7 @@ void	*threadproc(void *arg)
 		issleeping(philo->timetosleep);
 		printmessage(philo, THINKING);
 		if (isdead(philo, NIL) || (philo->nbrofeat == 0))
-			if (philo->nbrofeat == 0 && (*philo->isdead = 1))
+			if (isdead(philo, NIL) || (philo->nbrofeat == 0 && (*philo->isdead = 1)))
 				return (0);
 	}
 	return (NULL);
