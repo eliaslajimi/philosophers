@@ -15,10 +15,12 @@
 int		initiatethread(t_strct *philo, int nbrphilos)
 {
 	static int	ret;
+	pthread_t	timer;
 	pthread_t	thread[nbrphilos];
 
 	threaddetach(nbrphilos, &thread[0]);
 	threadcreate(nbrphilos, &thread[0], philo);
+	ret = pthread_create(&timer, NULL, checktime, (void*)philo);
 	threadjoin(nbrphilos, &thread[0]);
 	freestruct(philo);
 	return (ret);
@@ -47,16 +49,26 @@ int		threadcreate(int nofthreads, pthread_t *thread, t_strct *arg)
 {
 	static int	i;
 	static int	ret;
-	pthread_t	timer;
+	sem_t		*semfork;
+	sem_t		*semstate;
+	sem_t		*semprint;
 
+	sem_unlink(SEM_FORK);
+	sem_unlink(SEM_STATE);
+	sem_unlink(SEM_PRINT);
+	semfork = sem_open(SEM_FORK, O_CREAT, 0660, nofthreads);
+	semstate = sem_open(SEM_STATE, O_CREAT, 0660, 1);
+	semprint = sem_open(SEM_PRINT, O_CREAT, 0660, 1);
 	while (i < nofthreads)
 	{
 		usleep(50);
+		arg[i].semfork = semfork;
+		arg[i].semstate = semstate;
+		arg[i].semprint = semprint;
 		if ((ret = pthread_create(&thread[i], NULL,\
 		threadproc, (void*)&arg[i])))
 			return (ret);
 		i++;
 	}
-	ret = pthread_create(&timer, NULL, checktime, (void*)arg);
 	return (ret);
 }

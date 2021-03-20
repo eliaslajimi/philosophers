@@ -24,13 +24,13 @@ int		elapsed(struct timeval then, struct timeval now)
 void	*checktime(void *arg)
 {
 	t_strct		*philo;
-	int			ret;
 	static int	i;
 
 	philo = (t_strct*)arg;
-	ret = 0;
 	while (1)
 	{
+		if (philo[i].isdead)
+			i++;
 		while (i < philo[i].nbrphilos)
 		{
 			if (philo[i].haseaten)

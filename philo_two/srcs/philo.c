@@ -14,19 +14,11 @@
 
 int		initproc(t_strct **philo, int *lfork, int *rfork, void *arg)
 {
-	//pthread_mutex_lock(&g_minit);
-	//sem_wait((*philo)->semstate);
-	printf("its going through\n");
-	fflush(stdout);
 	*philo = (t_strct*)arg;
-	//pthread_mutex_unlock(&g_minit);
-	//pthread_mutex_lock(&g_minit);
 	*lfork = (*philo)->fork[0];
 	*rfork = (*philo)->fork[1];
 	gettimeofday(&(*philo)->start, NULL);
 	gettimeofday(&(*philo)->end, NULL);
-	//pthread_mutex_unlock(&g_minit);
-	//sem_post((*philo)->semstate);
 	if (!((*philo)->id % 2))
 		usleep((*philo)->nbrphilos * 200);
 	return (0);
@@ -59,14 +51,12 @@ void	printmessage(t_strct *philo, int status)
 	static int		nil;
 	struct timeval	now;
 
-	//pthread_mutex_lock(&g_mprint);
 	sem_wait(philo->semprint);
 	gettimeofday(&now, NULL);
 	i = philo->id;
 	if (nil && (philo->nbrofeat <= 0))
 	{
 		sem_post(philo->semprint);
-		//pthread_mutex_unlock(&g_mprint);
 		return ;
 	}
 	if (status == EATING)
@@ -77,7 +67,6 @@ void	printmessage(t_strct *philo, int status)
 	if (status == DIED)
 		nil = 1;
 	sem_post(philo->semprint);
-	//pthread_mutex_unlock(&g_mprint);
 }
 
 int		dead(t_strct *philo)
@@ -94,13 +83,3 @@ int		dead(t_strct *philo)
 	}
 	return (0);
 }
-
-//int		callfork(t_strct *philo, int status)
-//{
-//	int i;
-//
-//	pthread_mutex_lock(&g_minit);
-//	i = setforks(philo, TAKEN);
-//	pthread_mutex_unlock(&g_minit);
-//	return (i);
-//}

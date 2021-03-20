@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _PHILO_TWO_H_
-# define _PHILO_TWO_H_
+#ifndef _PHILO_TWO_H
+# define _PHILO_TWO_H
 
 # include <pthread.h>
 # include <stdio.h>
@@ -23,8 +23,8 @@
 # include <sys/time.h>
 # include <semaphore.h>
 # include <math.h>
-#include <fcntl.h>
-#include <sys/stat.h>
+# include <fcntl.h>
+# include <sys/stat.h>
 
 # define NIL 0
 # define INIT 1
@@ -46,7 +46,7 @@ typedef struct		s_strct
 	pthread_t		checktime;
 	int				fork[2];
 	int				*bfork;
-	sem_t 			*semfork;
+	sem_t			*semfork;
 	sem_t			*semstate;
 	sem_t			*semprint;
 	int				id;
@@ -70,7 +70,7 @@ void				ft_putstr_fd(char *s, int fd);
 char				*ft_strdup(char *s1);
 int					setforks(t_strct *philo, int status);
 void				setqueue(t_strct *philo, int status);
-int					distributeforks(t_strct *philo, int *bfork);//,\ pthread_mutex_t *mfork);
+int					distributeforks(t_strct *philo, int *bfork);
 void				freestruct(t_strct *philo);
 t_strct				*init(char **input, t_strct *philo, int i, int *isdead);
 int					checkerror(char **input);

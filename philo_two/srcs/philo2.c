@@ -63,7 +63,7 @@ void	*threadproc(void *arg)
 	int			lfork;
 	int			rfork;
 	int			ret;
-	t_strct			*philo;
+	t_strct		*philo;
 
 	ret = 0;
 	initproc(&philo, &lfork, &rfork, arg);
@@ -80,8 +80,9 @@ void	*threadproc(void *arg)
 		takefork(philo, FREE);
 		issleeping(philo->timetosleep);
 		printmessage(philo, THINKING);
-		if (isdead(philo, NIL) && (philo->nbrofeat <= 0))
-			return (0);
+		if (isdead(philo, NIL) || (philo->nbrofeat == 0))
+			if (philo->nbrofeat == 0 && (*philo->isdead = 1))
+				return (0);
 	}
 	return (NULL);
 }
