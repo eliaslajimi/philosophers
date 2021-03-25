@@ -58,6 +58,15 @@ void	takefork(t_strct *philo, int status)
 	}
 }
 
+int	isalive(t_strct *philo)
+{
+	if (isdead(philo, NIL) || (philo->nbrofeat == 0))
+		if (isdead(philo, NIL) ||\
+				(philo->nbrofeat == 0 && (*philo->isdead = 1)))
+			return (0);
+	return (1);
+}
+
 void	*threadproc(void *arg)
 {
 	int			lfork;
@@ -67,7 +76,7 @@ void	*threadproc(void *arg)
 
 	ret = 0;
 	initproc(&philo, &lfork, &rfork, arg);
-	while (1)
+	while (isalive(philo))
 	{
 		takefork(philo, TAKEN);
 		printmessage(philo, FORK);

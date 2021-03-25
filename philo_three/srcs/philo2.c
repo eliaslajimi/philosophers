@@ -109,7 +109,7 @@ void	*isliving(void *arg)
 	initproc(&philo, &lfork, &rfork, arg);
 	pthread_create(&philo->wrapper, NULL, wrapper, (void*)philo);
 	pthread_create(&philo->eating, NULL, eating, (void*)philo);
-	while (isalive(philo) && !*(philo->isdead))
+	while (isalive(philo))
 	{
 		takefork(philo, TAKEN);
 		printmessage(philo, FORK);
@@ -123,6 +123,5 @@ void	*isliving(void *arg)
 		issleeping(philo->timetosleep);
 		printmessage(philo, THINKING);
 	}
-	//return (NULL);
 	exit(0);
 }

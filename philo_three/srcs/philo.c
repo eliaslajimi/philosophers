@@ -67,7 +67,8 @@ void	printmessage(t_strct *philo, int status)
 	writing(philo, status, nil, now);
 	if (status == DIED)
 		nil = 1;
-	sem_post(philo->semprint);
+	if (status != DIED)
+		sem_post(philo->semprint);
 }
 
 int		dead(t_strct *philo)

@@ -66,7 +66,7 @@ t_strct		*init1(char **input, t_strct *philo)
 		philo[i].timetoeat = ft_atoi(input[3]);
 		philo[i].timetosleep = ft_atoi(input[4]);
 		if (ft_atoi(input[5]))
-			philo[i].nbrofeat = ft_atoi(input[5]) + 1;
+			philo[i].nbrofeat = ft_atoi(input[5]);
 		else
 			philo[i].nbrofeat = -1;
 		i++;

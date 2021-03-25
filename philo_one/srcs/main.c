@@ -34,7 +34,17 @@ int		checkerror(char **input)
 	i = 1;
 	while (input[i] && ft_atoi(input[i]) >= 0)
 		i++;
-	return ((i < 5) || (i > 6));
+	if (ft_atoi(input[1]) <= 1 || ft_atoi(input[1]) > 200)
+		return (1);
+	if ((i < 5) || (i > 6))
+		return (1);
+	i = 2;
+	while (i < 5)
+		if (ft_atoi(input[i++]) < 60)
+			return (1);
+	if (ft_atoi(input[5]) && ft_atoi(input[5]) <= 0)
+		return (1);
+	return (0);
 }
 
 void	freestruct(t_strct *philo)

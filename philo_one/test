@@ -1,0 +1,600 @@
+1 Philosopher 1 has taken a fork
+1 Philosopher 1 has taken a fork
+1 Philosopher 1 is eating
+1 Philosopher 3 has taken a fork
+1 Philosopher 3 has taken a fork
+1 Philosopher 3 is eating
+1 Philosopher 5 has taken a fork
+1 Philosopher 5 has taken a fork
+1 Philosopher 5 is eating
+1 Philosopher 7 has taken a fork
+1 Philosopher 7 has taken a fork
+1 Philosopher 7 is eating
+1 Philosopher 9 has taken a fork
+1 Philosopher 9 has taken a fork
+1 Philosopher 9 is eating
+1 Philosopher 11 has taken a fork
+2 Philosopher 11 has taken a fork
+2 Philosopher 11 is eating
+2 Philosopher 13 has taken a fork
+2 Philosopher 13 has taken a fork
+2 Philosopher 13 is eating
+2 Philosopher 15 has taken a fork
+2 Philosopher 15 has taken a fork
+2 Philosopher 15 is eating
+2 Philosopher 17 has taken a fork
+2 Philosopher 17 has taken a fork
+2 Philosopher 17 is eating
+2 Philosopher 19 has taken a fork
+2 Philosopher 19 has taken a fork
+2 Philosopher 19 is eating
+2 Philosopher 21 has taken a fork
+2 Philosopher 21 has taken a fork
+2 Philosopher 21 is eating
+2 Philosopher 23 has taken a fork
+2 Philosopher 23 has taken a fork
+2 Philosopher 23 is eating
+3 Philosopher 25 has taken a fork
+3 Philosopher 25 has taken a fork
+3 Philosopher 25 is eating
+3 Philosopher 27 has taken a fork
+3 Philosopher 27 has taken a fork
+3 Philosopher 27 is eating
+3 Philosopher 29 has taken a fork
+3 Philosopher 29 has taken a fork
+3 Philosopher 29 is eating
+3 Philosopher 31 has taken a fork
+3 Philosopher 31 has taken a fork
+3 Philosopher 31 is eating
+3 Philosopher 33 has taken a fork
+3 Philosopher 33 has taken a fork
+3 Philosopher 33 is eating
+3 Philosopher 35 has taken a fork
+3 Philosopher 35 has taken a fork
+3 Philosopher 35 is eating
+4 Philosopher 37 has taken a fork
+4 Philosopher 37 has taken a fork
+4 Philosopher 37 is eating
+4 Philosopher 39 has taken a fork
+4 Philosopher 39 has taken a fork
+4 Philosopher 39 is eating
+4 Philosopher 41 has taken a fork
+4 Philosopher 41 has taken a fork
+4 Philosopher 41 is eating
+4 Philosopher 43 has taken a fork
+4 Philosopher 43 has taken a fork
+4 Philosopher 43 is eating
+4 Philosopher 45 has taken a fork
+4 Philosopher 45 has taken a fork
+4 Philosopher 45 is eating
+4 Philosopher 47 has taken a fork
+4 Philosopher 47 has taken a fork
+4 Philosopher 47 is eating
+4 Philosopher 49 has taken a fork
+4 Philosopher 49 has taken a fork
+4 Philosopher 49 is eating
+5 Philosopher 51 has taken a fork
+5 Philosopher 51 has taken a fork
+5 Philosopher 51 is eating
+5 Philosopher 53 has taken a fork
+5 Philosopher 53 has taken a fork
+5 Philosopher 53 is eating
+5 Philosopher 55 has taken a fork
+5 Philosopher 55 has taken a fork
+5 Philosopher 55 is eating
+5 Philosopher 57 has taken a fork
+5 Philosopher 57 has taken a fork
+5 Philosopher 57 is eating
+5 Philosopher 59 has taken a fork
+5 Philosopher 59 has taken a fork
+5 Philosopher 59 is eating
+201 Philosopher 1 is sleeping
+201 Philosopher 9 is sleeping
+201 Philosopher 5 is sleeping
+201 Philosopher 3 is sleeping
+201 Philosopher 7 is sleeping
+201 Philosopher 2 has taken a fork
+201 Philosopher 4 has taken a fork
+201 Philosopher 6 has taken a fork
+201 Philosopher 8 has taken a fork
+201 Philosopher 2 has taken a fork
+201 Philosopher 4 has taken a fork
+201 Philosopher 6 has taken a fork
+201 Philosopher 8 has taken a fork
+201 Philosopher 2 is eating
+201 Philosopher 4 is eating
+201 Philosopher 6 is eating
+201 Philosopher 8 is eating
+202 Philosopher 13 is sleeping
+202 Philosopher 19 is sleeping
+202 Philosopher 21 is sleeping
+202 Philosopher 11 is sleeping
+202 Philosopher 15 is sleeping
+202 Philosopher 20 has taken a fork
+202 Philosopher 17 is sleeping
+202 Philosopher 10 has taken a fork
+202 Philosopher 12 has taken a fork
+202 Philosopher 14 has taken a fork
+202 Philosopher 20 has taken a fork
+202 Philosopher 16 has taken a fork
+202 Philosopher 18 has taken a fork
+202 Philosopher 10 has taken a fork
+202 Philosopher 12 has taken a fork
+202 Philosopher 14 has taken a fork
+202 Philosopher 20 is eating
+202 Philosopher 16 has taken a fork
+202 Philosopher 18 has taken a fork
+203 Philosopher 10 is eating
+203 Philosopher 12 is eating
+203 Philosopher 14 is eating
+203 Philosopher 16 is eating
+203 Philosopher 18 is eating
+203 Philosopher 27 is sleeping
+203 Philosopher 33 is sleeping
+203 Philosopher 23 is sleeping
+203 Philosopher 31 is sleeping
+203 Philosopher 29 is sleeping
+203 Philosopher 25 is sleeping
+203 Philosopher 35 is sleeping
+203 Philosopher 22 has taken a fork
+203 Philosopher 32 has taken a fork
+203 Philosopher 28 has taken a fork
+203 Philosopher 30 has taken a fork
+203 Philosopher 24 has taken a fork
+203 Philosopher 26 has taken a fork
+203 Philosopher 34 has taken a fork
+203 Philosopher 22 has taken a fork
+204 Philosopher 32 has taken a fork
+204 Philosopher 28 has taken a fork
+204 Philosopher 30 has taken a fork
+204 Philosopher 24 has taken a fork
+204 Philosopher 26 has taken a fork
+204 Philosopher 34 has taken a fork
+204 Philosopher 22 is eating
+204 Philosopher 32 is eating
+204 Philosopher 47 is sleeping
+204 Philosopher 28 is eating
+204 Philosopher 43 is sleeping
+204 Philosopher 45 is sleeping
+204 Philosopher 37 is sleeping
+204 Philosopher 49 is sleeping
+204 Philosopher 30 is eating
+204 Philosopher 24 is eating
+204 Philosopher 39 is sleeping
+204 Philosopher 41 is sleeping
+204 Philosopher 26 is eating
+204 Philosopher 34 is eating
+205 Philosopher 44 has taken a fork
+205 Philosopher 46 has taken a fork
+205 Philosopher 36 has taken a fork
+205 Philosopher 48 has taken a fork
+205 Philosopher 38 has taken a fork
+205 Philosopher 40 has taken a fork
+205 Philosopher 42 has taken a fork
+205 Philosopher 44 has taken a fork
+205 Philosopher 46 has taken a fork
+205 Philosopher 51 is sleeping
+205 Philosopher 55 is sleeping
+205 Philosopher 53 is sleeping
+205 Philosopher 59 is sleeping
+205 Philosopher 36 has taken a fork
+205 Philosopher 57 is sleeping
+205 Philosopher 48 has taken a fork
+205 Philosopher 38 has taken a fork
+205 Philosopher 40 has taken a fork
+205 Philosopher 42 has taken a fork
+205 Philosopher 44 is eating
+206 Philosopher 46 is eating
+206 Philosopher 50 has taken a fork
+206 Philosopher 52 has taken a fork
+206 Philosopher 54 has taken a fork
+206 Philosopher 0 has taken a fork
+206 Philosopher 36 is eating
+206 Philosopher 56 has taken a fork
+206 Philosopher 58 has taken a fork
+206 Philosopher 48 is eating
+206 Philosopher 38 is eating
+206 Philosopher 40 is eating
+206 Philosopher 42 is eating
+206 Philosopher 50 has taken a fork
+206 Philosopher 52 has taken a fork
+206 Philosopher 54 has taken a fork
+206 Philosopher 0 has taken a fork
+206 Philosopher 56 has taken a fork
+207 Philosopher 58 has taken a fork
+207 Philosopher 50 is eating
+207 Philosopher 52 is eating
+207 Philosopher 54 is eating
+207 Philosopher 0 is eating
+207 Philosopher 56 is eating
+207 Philosopher 58 is eating
+401 Philosopher 2 is sleeping
+401 Philosopher 6 is sleeping
+401 Philosopher 3 is thinking
+401 Philosopher 7 is thinking
+401 Philosopher 9 is thinking
+401 Philosopher 4 is sleeping
+401 Philosopher 1 is thinking
+401 Philosopher 5 is thinking
+401 Philosopher 3 has taken a fork
+401 Philosopher 5 has taken a fork
+401 Philosopher 3 has taken a fork
+401 Philosopher 5 has taken a fork
+402 Philosopher 3 is eating
+402 Philosopher 5 is eating
+402 Philosopher 21 is thinking
+402 Philosopher 13 is thinking
+402 Philosopher 11 is thinking
+402 Philosopher 15 is thinking
+402 Philosopher 20 is sleeping
+402 Philosopher 8 is sleeping
+402 Philosopher 19 is thinking
+402 Philosopher 17 is thinking
+402 Philosopher 7 has taken a fork
+402 Philosopher 7 has taken a fork
+402 Philosopher 7 is eating
+403 Philosopher 35 is thinking
+403 Philosopher 25 is thinking
+403 Philosopher 10 is sleeping
+403 Philosopher 14 is sleeping
+403 Philosopher 12 is sleeping
+403 Philosopher 18 is sleeping
+403 Philosopher 27 is thinking
+403 Philosopher 16 is sleeping
+403 Philosopher 31 is thinking
+403 Philosopher 33 is thinking
+403 Philosopher 23 is thinking
+403 Philosopher 29 is thinking
+403 Philosopher 9 has taken a fork
+403 Philosopher 11 has taken a fork
+403 Philosopher 13 has taken a fork
+403 Philosopher 19 has taken a fork
+403 Philosopher 15 has taken a fork
+403 Philosopher 17 has taken a fork
+404 Philosopher 9 has taken a fork
+404 Philosopher 11 has taken a fork
+404 Philosopher 13 has taken a fork
+404 Philosopher 19 has taken a fork
+404 Philosopher 15 has taken a fork
+404 Philosopher 17 has taken a fork
+404 Philosopher 9 is eating
+404 Philosopher 11 is eating
+404 Philosopher 30 is sleeping
+404 Philosopher 22 is sleeping
+404 Philosopher 47 is thinking
+404 Philosopher 49 is thinking
+404 Philosopher 45 is thinking
+404 Philosopher 28 is sleeping
+404 Philosopher 43 is thinking
+404 Philosopher 13 is eating
+404 Philosopher 19 is eating
+404 Philosopher 37 is thinking
+404 Philosopher 39 is thinking
+404 Philosopher 41 is thinking
+404 Philosopher 32 is sleeping
+405 Philosopher 26 is sleeping
+405 Philosopher 24 is sleeping
+405 Philosopher 15 is eating
+405 Philosopher 17 is eating
+405 Philosopher 21 has taken a fork
+405 Philosopher 29 has taken a fork
+405 Philosopher 31 has taken a fork
+405 Philosopher 27 has taken a fork
+405 Philosopher 23 has taken a fork
+405 Philosopher 25 has taken a fork
+405 Philosopher 51 is thinking
+405 Philosopher 34 is sleeping
+405 Philosopher 59 is thinking
+405 Philosopher 55 is thinking
+405 Philosopher 53 is thinking
+405 Philosopher 21 has taken a fork
+405 Philosopher 57 is thinking
+405 Philosopher 29 has taken a fork
+405 Philosopher 31 has taken a fork
+405 Philosopher 27 has taken a fork
+405 Philosopher 23 has taken a fork
+405 Philosopher 25 has taken a fork
+406 Philosopher 33 has taken a fork
+406 Philosopher 21 is eating
+406 Philosopher 29 is eating
+406 Philosopher 31 is eating
+406 Philosopher 27 is eating
+406 Philosopher 23 is eating
+406 Philosopher 25 is eating
+406 Philosopher 33 has taken a fork
+406 Philosopher 46 is sleeping
+406 Philosopher 36 is sleeping
+406 Philosopher 40 is sleeping
+406 Philosopher 42 is sleeping
+406 Philosopher 48 is sleeping
+406 Philosopher 38 is sleeping
+406 Philosopher 44 is sleeping
+406 Philosopher 33 is eating
+406 Philosopher 35 has taken a fork
+406 Philosopher 41 has taken a fork
+406 Philosopher 47 has taken a fork
+406 Philosopher 39 has taken a fork
+406 Philosopher 37 has taken a fork
+407 Philosopher 43 has taken a fork
+407 Philosopher 45 has taken a fork
+407 Philosopher 35 has taken a fork
+407 Philosopher 41 has taken a fork
+407 Philosopher 47 has taken a fork
+407 Philosopher 39 has taken a fork
+407 Philosopher 37 has taken a fork
+407 Philosopher 43 has taken a fork
+407 Philosopher 45 has taken a fork
+407 Philosopher 52 is sleeping
+407 Philosopher 56 is sleeping
+407 Philosopher 50 is sleeping
+407 Philosopher 35 is eating
+407 Philosopher 54 is sleeping
+407 Philosopher 58 is sleeping
+407 Philosopher 0 is sleeping
+407 Philosopher 41 is eating
+407 Philosopher 47 is eating
+407 Philosopher 39 is eating
+408 Philosopher 37 is eating
+408 Philosopher 43 is eating
+408 Philosopher 45 is eating
+408 Philosopher 49 has taken a fork
+408 Philosopher 51 has taken a fork
+408 Philosopher 53 has taken a fork
+408 Philosopher 55 has taken a fork
+408 Philosopher 57 has taken a fork
+408 Philosopher 59 has taken a fork
+408 Philosopher 1 has taken a fork
+408 Philosopher 49 has taken a fork
+408 Philosopher 51 has taken a fork
+408 Philosopher 53 has taken a fork
+408 Philosopher 55 has taken a fork
+408 Philosopher 57 has taken a fork
+408 Philosopher 59 has taken a fork
+408 Philosopher 1 has taken a fork
+409 Philosopher 49 is eating
+409 Philosopher 51 is eating
+409 Philosopher 53 is eating
+409 Philosopher 55 is eating
+409 Philosopher 57 is eating
+409 Philosopher 59 is eating
+409 Philosopher 1 is eating
+601 Philosopher 2 is thinking
+601 Philosopher 4 is thinking
+601 Philosopher 6 is thinking
+602 Philosopher 3 is sleeping
+602 Philosopher 8 is thinking
+602 Philosopher 5 is sleeping
+602 Philosopher 7 is sleeping
+602 Philosopher 20 is thinking
+602 Philosopher 4 has taken a fork
+602 Philosopher 6 has taken a fork
+602 Philosopher 4 has taken a fork
+602 Philosopher 6 has taken a fork
+602 Philosopher 4 is eating
+602 Philosopher 6 is eating
+603 Philosopher 10 is thinking
+603 Philosopher 14 is thinking
+603 Philosopher 18 is thinking
+603 Philosopher 16 is thinking
+603 Philosopher 12 is thinking
+604 Philosopher 9 is sleeping
+604 Philosopher 13 is sleeping
+604 Philosopher 28 is thinking
+604 Philosopher 19 is sleeping
+604 Philosopher 11 is sleeping
+604 Philosopher 30 is thinking
+604 Philosopher 22 is thinking
+604 Philosopher 8 has taken a fork
+604 Philosopher 10 has taken a fork
+604 Philosopher 12 has taken a fork
+604 Philosopher 8 has taken a fork
+604 Philosopher 10 has taken a fork
+604 Philosopher 12 has taken a fork
+604 Philosopher 8 is eating
+604 Philosopher 10 is eating
+604 Philosopher 12 is eating
+605 Philosopher 15 is sleeping
+605 Philosopher 17 is sleeping
+605 Philosopher 32 is thinking
+605 Philosopher 24 is thinking
+605 Philosopher 34 is thinking
+605 Philosopher 26 is thinking
+605 Philosopher 14 has taken a fork
+605 Philosopher 16 has taken a fork
+605 Philosopher 18 has taken a fork
+605 Philosopher 14 has taken a fork
+605 Philosopher 16 has taken a fork
+605 Philosopher 18 has taken a fork
+605 Philosopher 14 is eating
+605 Philosopher 16 is eating
+605 Philosopher 18 is eating
+606 Philosopher 38 is thinking
+606 Philosopher 23 is sleeping
+606 Philosopher 44 is thinking
+606 Philosopher 42 is thinking
+606 Philosopher 40 is thinking
+606 Philosopher 46 is thinking
+606 Philosopher 21 is sleeping
+606 Philosopher 31 is sleeping
+606 Philosopher 36 is thinking
+606 Philosopher 33 is sleeping
+606 Philosopher 29 is sleeping
+606 Philosopher 25 is sleeping
+606 Philosopher 48 is thinking
+606 Philosopher 27 is sleeping
+606 Philosopher 20 has taken a fork
+606 Philosopher 22 has taken a fork
+606 Philosopher 32 has taken a fork
+606 Philosopher 30 has taken a fork
+606 Philosopher 24 has taken a fork
+607 Philosopher 26 has taken a fork
+607 Philosopher 28 has taken a fork
+607 Philosopher 20 has taken a fork
+607 Philosopher 22 has taken a fork
+607 Philosopher 32 has taken a fork
+607 Philosopher 30 has taken a fork
+607 Philosopher 24 has taken a fork
+607 Philosopher 26 has taken a fork
+607 Philosopher 28 has taken a fork
+607 Philosopher 0 is thinking
+607 Philosopher 20 is eating
+607 Philosopher 54 is thinking
+607 Philosopher 35 is sleeping
+607 Philosopher 58 is thinking
+607 Philosopher 41 is sleeping
+607 Philosopher 56 is thinking
+607 Philosopher 52 is thinking
+607 Philosopher 50 is thinking
+607 Philosopher 47 is sleeping
+607 Philosopher 22 is eating
+607 Philosopher 32 is eating
+608 Philosopher 30 is eating
+608 Philosopher 24 is eating
+608 Philosopher 26 is eating
+608 Philosopher 28 is eating
+608 Philosopher 34 has taken a fork
+608 Philosopher 43 is sleeping
+608 Philosopher 37 is sleeping
+608 Philosopher 45 is sleeping
+608 Philosopher 39 is sleeping
+608 Philosopher 34 has taken a fork
+608 Philosopher 42 has taken a fork
+608 Philosopher 36 has taken a fork
+608 Philosopher 44 has taken a fork
+608 Philosopher 46 has taken a fork
+608 Philosopher 38 has taken a fork
+608 Philosopher 40 has taken a fork
+608 Philosopher 34 is eating
+608 Philosopher 42 has taken a fork
+608 Philosopher 36 has taken a fork
+608 Philosopher 44 has taken a fork
+608 Philosopher 46 has taken a fork
+609 Philosopher 38 has taken a fork
+609 Philosopher 40 has taken a fork
+609 Philosopher 42 is eating
+609 Philosopher 36 is eating
+609 Philosopher 44 is eating
+609 Philosopher 46 is eating
+609 Philosopher 38 is eating
+609 Philosopher 40 is eating
+609 Philosopher 55 is sleeping
+609 Philosopher 49 is sleeping
+609 Philosopher 51 is sleeping
+609 Philosopher 59 is sleeping
+609 Philosopher 1 is sleeping
+609 Philosopher 57 is sleeping
+609 Philosopher 53 is sleeping
+609 Philosopher 48 has taken a fork
+609 Philosopher 50 has taken a fork
+609 Philosopher 0 has taken a fork
+609 Philosopher 2 has taken a fork
+609 Philosopher 56 has taken a fork
+609 Philosopher 58 has taken a fork
+610 Philosopher 52 has taken a fork
+610 Philosopher 54 has taken a fork
+610 Philosopher 48 has taken a fork
+610 Philosopher 50 has taken a fork
+610 Philosopher 0 has taken a fork
+610 Philosopher 2 has taken a fork
+610 Philosopher 56 has taken a fork
+610 Philosopher 58 has taken a fork
+610 Philosopher 52 has taken a fork
+610 Philosopher 54 has taken a fork
+610 Philosopher 48 is eating
+610 Philosopher 50 is eating
+610 Philosopher 0 is eating
+610 Philosopher 2 is eating
+610 Philosopher 56 is eating
+610 Philosopher 58 is eating
+610 Philosopher 52 is eating
+610 Philosopher 54 is eating
+802 Philosopher 5 is thinking
+802 Philosopher 7 is thinking
+802 Philosopher 4 is sleeping
+802 Philosopher 3 is thinking
+802 Philosopher 6 is sleeping
+804 Philosopher 9 is thinking
+804 Philosopher 11 is thinking
+804 Philosopher 19 is thinking
+804 Philosopher 10 is sleeping
+804 Philosopher 13 is thinking
+804 Philosopher 12 is sleeping
+804 Philosopher 8 is sleeping
+805 Philosopher 15 is thinking
+805 Philosopher 16 is sleeping
+805 Philosopher 14 is sleeping
+805 Philosopher 17 is thinking
+805 Philosopher 18 is sleeping
+806 Philosopher 29 is thinking
+806 Philosopher 23 is thinking
+806 Philosopher 33 is thinking
+806 Philosopher 31 is thinking
+806 Philosopher 25 is thinking
+806 Philosopher 21 is thinking
+806 Philosopher 27 is thinking
+807 Philosopher 20 is sleeping
+807 Philosopher 41 is thinking
+807 Philosopher 47 is thinking
+807 Philosopher 35 is thinking
+807 Philosopher 22 is sleeping
+808 Philosopher 32 is sleeping
+808 Philosopher 43 is thinking
+808 Philosopher 39 is thinking
+808 Philosopher 28 is sleeping
+808 Philosopher 30 is sleeping
+808 Philosopher 24 is sleeping
+808 Philosopher 45 is thinking
+808 Philosopher 34 is sleeping
+808 Philosopher 26 is sleeping
+808 Philosopher 37 is thinking
+809 Philosopher 57 is thinking
+809 Philosopher 59 is thinking
+809 Philosopher 44 is sleeping
+809 Philosopher 38 is sleeping
+809 Philosopher 1 is thinking
+809 Philosopher 55 is thinking
+809 Philosopher 53 is thinking
+809 Philosopher 51 is thinking
+809 Philosopher 46 is sleeping
+809 Philosopher 36 is sleeping
+809 Philosopher 42 is sleeping
+809 Philosopher 40 is sleeping
+809 Philosopher 49 is thinking
+810 Philosopher 56 is sleeping
+810 Philosopher 50 is sleeping
+810 Philosopher 58 is sleeping
+810 Philosopher 2 is sleeping
+810 Philosopher 0 is sleeping
+810 Philosopher 48 is sleeping
+810 Philosopher 54 is sleeping
+810 Philosopher 52 is sleeping
+1002 Philosopher 6 is thinking
+1002 Philosopher 4 is thinking
+1004 Philosopher 8 is thinking
+1004 Philosopher 10 is thinking
+1004 Philosopher 12 is thinking
+1005 Philosopher 14 is thinking
+1005 Philosopher 16 is thinking
+1005 Philosopher 18 is thinking
+1007 Philosopher 20 is thinking
+1007 Philosopher 22 is thinking
+1008 Philosopher 34 is thinking
+1008 Philosopher 30 is thinking
+1008 Philosopher 26 is thinking
+1008 Philosopher 24 is thinking
+1008 Philosopher 28 is thinking
+1008 Philosopher 32 is thinking
+1009 Philosopher 38 is thinking
+1009 Philosopher 36 is thinking
+1009 Philosopher 46 is thinking
+1009 Philosopher 44 is thinking
+1009 Philosopher 40 is thinking
+1009 Philosopher 42 is thinking
+1010 Philosopher 2 is thinking
+1010 Philosopher 58 is thinking
+1010 Philosopher 52 is thinking
+1010 Philosopher 48 is thinking
+1010 Philosopher 0 is thinking
+1010 Philosopher 54 is thinking
+1010 Philosopher 56 is thinking
+1010 Philosopher 50 is thinking
