@@ -91,5 +91,8 @@ int					queue(t_strct *philo);
 int					ft_strlen(char *s);
 int					dead(t_strct *philo);
 int					threaddetach(int nofthreads, pthread_t *thread);
+int					init2(t_strct *philo, int *isdead, int *queue,\
+					struct timeval *stamp);
+int					init3(t_strct *philo, int *bfork);
 
 #endif

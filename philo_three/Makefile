@@ -1,10 +1,12 @@
 FILES =	init.c\
+	init2.c\
 	main.c\
 	philo.c\
 	philo2.c\
 	thread.c\
 	queue.c\
 	time.c\
+	check.c\
 	utils/ft_strlen.c\
 	utils/ft_atoi.c\
 	utils/ft_itoa.c\

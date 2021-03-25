@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _PHILO_TWO_H
-# define _PHILO_TWO_H
+#ifndef _PHILO_THREE_H
+# define _PHILO_THREE_H
 
 # include <pthread.h>
 # include <stdio.h>
@@ -92,7 +92,6 @@ int					initproc(t_strct **philo, int *lfork, int *rfork,\
 void				*threadproc(void *arg);
 void				printmessage(t_strct *philo, int status);
 int					elapsed(struct timeval then, struct timeval now);
-void				*checktime(void *arg);
 int					iswaiting(t_strct **philo);
 int					queue(t_strct *philo);
 int					ft_strlen(char *s);
@@ -102,6 +101,11 @@ int					givesem(t_strct *philo);
 int					forkcreate(t_strct *philo);
 int					initiateforks(t_strct *philo, int nbrphilos);
 int					waitfork(t_strct *philo);
-void					*isliving(void *arg);
+void				*isliving(void *arg);
+int					init2(t_strct *philo, int *isdead, int *queue,\
+					struct timeval *stamp);
+int					init3(t_strct *philo, int *bfork);
+void				*eating(void *arg);
+void				*wrapper(void *arg);
 
 #endif

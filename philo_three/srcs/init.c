@@ -66,7 +66,7 @@ t_strct		*init1(char **input, t_strct *philo)
 		philo[i].timetoeat = ft_atoi(input[3]);
 		philo[i].timetosleep = ft_atoi(input[4]);
 		if (ft_atoi(input[5]))
-			philo[i].nbrofeat = ft_atoi(input[5]) + 1;
+			philo[i].nbrofeat = ft_atoi(input[5]);
 		else
 			philo[i].nbrofeat = -1;
 		i++;
@@ -74,27 +74,37 @@ t_strct		*init1(char **input, t_strct *philo)
 	return (&philo[0]);
 }
 
+int			launch(t_strct *philo, struct timeval *stamp)
+{
+	gettimeofday(stamp, NULL);
+	setforks(&philo[0], INIT);
+	setqueue(&philo[0], INIT);
+	return (0);
+}
+
 t_strct		*init(char **input, t_strct *philo, int i, int *isdead)
 {
 	int				*bfork;
 	int				*queue;
 	struct timeval	*stamp;
+	pthread_mutex_t	*mutex2;
 
-	bfork = malloc((ft_atoi(input[1]) + 1) * 4);
-	stamp = malloc(sizeof(struct timeval));
-	queue = malloc((ft_atoi(input[1])) * 4);
-	philo = malloc(sizeof(t_strct) * (ft_atoi(input[1]) + 1));
+	if (!(bfork = malloc((ft_atoi(input[1]) + 1) * 4)))
+		return (NULL);
+	if (!(stamp = malloc(sizeof(struct timeval))))
+		return (NULL);
+	if (!(queue = malloc((ft_atoi(input[1])) * 4)))
+		return (NULL);
+	if (!(mutex2 = malloc((ft_atoi(input[1]) + 1) * sizeof(pthread_mutex_t))))
+		return (NULL);
+	if (!(philo = malloc(sizeof(t_strct) * (ft_atoi(input[1]) + 1))))
+		return (NULL);
 	while (i < ft_atoi(input[1]))
 	{
 		init1(input, philo);
-		philo[i].isdead = isdead;
-		philo[i].queue = queue;
-		philo[i].stamp = stamp;
-		distributeforks(&philo[i], &bfork[0]);
-		i++;
+		init2(&philo[i], isdead, queue, stamp);
+		init3(&philo[i++], bfork++);
 	}
-	gettimeofday(stamp, NULL);
-	setforks(&philo[0], INIT);
-	setqueue(&philo[0], INIT);
+	launch(philo, stamp);
 	return (&philo[0]);
 }

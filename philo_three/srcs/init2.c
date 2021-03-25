@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time.c                                             :+:      :+:    :+:   */
+/*   init2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elajimi <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: user42 <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/16 17:02:28 by elajimi           #+#    #+#             */
-/*   Updated: 2021/03/16 17:06:58 by elajimi          ###   ########.fr       */
+/*   Created: 2021/03/02 16:29:17 by user42            #+#    #+#             */
+/*   Updated: 2021/03/03 19:36:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
 
-int		elapsed(struct timeval then, struct timeval now)
+int			init3(t_strct *philo, int *bfork)
 {
-	int elapsed;
+	distributeforks(philo, &bfork[0]);
+	return (0);
+}
 
-	elapsed = ((now.tv_usec / 1000) + (now.tv_sec * 1000)) -\
-	((then.tv_usec / 1000) + (then.tv_sec * 1000));
-	return (elapsed);
+int			init2(t_strct *philo, int *isdead, int *queue,\
+		struct timeval *stamp)
+{
+	philo->isdead = isdead;
+	philo->queue = queue;
+	philo->stamp = stamp;
+	return (0);
 }

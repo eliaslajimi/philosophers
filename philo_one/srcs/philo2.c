@@ -58,7 +58,7 @@ void	takefork(t_strct *philo, int status)
 	}
 }
 
-int	isalive(t_strct *philo)
+int		isalive(t_strct *philo)
 {
 	if (isdead(philo, NIL) || (philo->nbrofeat == 0))
 		if (isdead(philo, NIL) ||\

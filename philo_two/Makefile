@@ -1,4 +1,5 @@
 FILES =	init.c\
+	init2.c\
 	main.c\
 	philo.c\
 	philo2.c\

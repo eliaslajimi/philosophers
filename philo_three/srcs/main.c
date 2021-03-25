@@ -63,7 +63,8 @@ int		main(int argc, char **argv)
 	static int	ret;
 	t_strct		*philo;
 
-	isdead = malloc(4);
+	if (!(isdead = malloc(4)))
+		return (0);
 	*isdead = 0;
 	if (checkerror(argv))
 		return (0);

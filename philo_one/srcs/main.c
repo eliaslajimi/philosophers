@@ -64,11 +64,13 @@ int		main(int argc, char **argv)
 	static int	ret;
 	t_strct		*philo;
 
-	isdead = malloc(4);
+	if (!(isdead = malloc(4)))
+		return (0);
 	*isdead = 0;
 	if (checkerror(argv))
 		return (0);
-	philo = init(argv, philo, i, isdead);
+	if (!(philo = init(argv, philo, i, isdead)))
+		return (0);
 	ret = initiatethread(philo, ft_atoi(argv[1]));
 	if (ret)
 		printerror(ret);

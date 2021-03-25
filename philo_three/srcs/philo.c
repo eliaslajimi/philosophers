@@ -61,7 +61,6 @@ void	printmessage(t_strct *philo, int status)
 	}
 	if (status == EATING)
 	{
-		//sem_post(philo->semeat);
 		philo->haseaten = 1;
 	}
 	writing(philo, status, nil, now);
