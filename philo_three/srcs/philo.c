@@ -12,8 +12,9 @@
 
 #include "philo_three.h"
 
-int		initproc(t_strct **philo, int *lfork, int *rfork)//, void *arg)
+int		initproc(t_strct **philo, int *lfork, int *rfork, void *arg)
 {
+	*philo = (t_strct*)arg;
 	*lfork = (*philo)->fork[0];
 	*rfork = (*philo)->fork[1];
 	gettimeofday(&(*philo)->start, NULL);
@@ -60,6 +61,7 @@ void	printmessage(t_strct *philo, int status)
 	}
 	if (status == EATING)
 	{
+		//sem_post(philo->semeat);
 		philo->haseaten = 1;
 	}
 	writing(philo, status, nil, now);
@@ -78,6 +80,7 @@ int		dead(t_strct *philo)
 	{
 		*philo->isdead = 1;
 		printmessage(philo, DIED);
+		sem_post(philo->semdead);
 		return (1);
 	}
 	return (0);

@@ -67,13 +67,49 @@ int		isalive(t_strct *philo)
 	return (1);
 }
 
-int		isliving(t_strct *philo)
+void	*eating(void *arg)
+{
+	t_strct *philo;
+
+	philo = (t_strct*)arg;
+	while(1)
+	{
+		if (philo->haseaten)
+		{
+			philo->haseaten = 0;
+			gettimeofday(&philo->start, NULL);
+		}
+		if (!*philo->isdead)
+			if (dead(philo))
+				return (0);
+		usleep(2000);
+	}
+	exit(0);
+}
+
+void	*wrapper(void *arg)
+{
+	t_strct *philo;
+
+	philo = (t_strct*)arg;
+	sem_wait(philo->semdead);
+	sem_post(philo->semdead);
+	*(philo->isdead) = 1;
+	exit(0);
+}
+
+void	*isliving(void *arg)
 {
 	int			lfork;
 	int			rfork;
+	int			ret;
+	t_strct		*philo;
 
-	initproc(&philo, &lfork, &rfork);
-	while (isalive(philo))
+	ret = 0;
+	initproc(&philo, &lfork, &rfork, arg);
+	pthread_create(&philo->wrapper, NULL, wrapper, (void*)philo);
+	pthread_create(&philo->eating, NULL, eating, (void*)philo);
+	while (isalive(philo) && !*(philo->isdead))
 	{
 		takefork(philo, TAKEN);
 		printmessage(philo, FORK);
@@ -87,5 +123,6 @@ int		isliving(t_strct *philo)
 		issleeping(philo->timetosleep);
 		printmessage(philo, THINKING);
 	}
+	//return (NULL);
 	exit(0);
 }

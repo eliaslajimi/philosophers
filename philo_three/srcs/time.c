@@ -27,24 +27,27 @@ void	*checktime(void *arg)
 	static int	i;
 
 	philo = (t_strct*)arg;
-	while (1)
-	{
-		if (philo[i].isdead)
-			i++;
-		while (i < philo[i].nbrphilos)
-		{
-			if (philo[i].haseaten)
-			{
-				philo[i].haseaten = 0;
-				gettimeofday(&philo[i].start, NULL);
-			}
-			if (!*philo[i].isdead)
-				if (dead(&philo[i]))
-					return (0);
-			i++;
-			usleep(2000);
-		}
-		i = 0;
-	}
+//	while (1)
+//	{
+//		if (philo[i].isdead)
+//			i++;
+//		while (i < philo[i].nbrphilos)
+//		{
+//			if (philo[i].haseaten)
+//			{
+//				philo[i].haseaten = 0;
+//				printf("-------------------------------->good\n");
+//				fflush(stdout);
+//				sem_wait(philo[i].semeat);
+//				gettimeofday(&philo[i].start, NULL);
+//			}
+//			if (!*philo[i].isdead)
+//				if (dead(&philo[i]))
+//					return (0);
+//			i++;
+//			usleep(2000);
+//		}
+//		i = 0;
+//	}
 	return (0);
 }

@@ -20,12 +20,11 @@
 # include <string.h>
 # include <limits.h>
 # include <errno.h>
+# include <sys/time.h>
 # include <semaphore.h>
 # include <math.h>
 # include <fcntl.h>
-# include <sys/types.h>
-# include <sys/time.h>
-//# include <sys/stat.h>
+# include <sys/stat.h>
 
 # define NIL 0
 # define INIT 1
@@ -40,18 +39,24 @@
 # define SEM_FORK "/sem_fork"
 # define SEM_STATE "/sem_state"
 # define SEM_PRINT "/sem_print"
+# define SEM_DEAD "/sem_dead"
+# define SEM_EAT "/sem_eat"
 
 typedef struct		s_strct
 {
 	pthread_t		thread;
 	pthread_t		checktime;
+	pthread_t		wrapper;
+	pthread_t		eating;
 	int				fork[2];
 	int				*bfork;
 	sem_t			*semfork;
 	sem_t			*semstate;
 	sem_t			*semprint;
-	int				pid;
+	sem_t			*semdead;
+	sem_t			*semeat;
 	int				id;
+	int				pid;
 	int				timetodie;
 	int				timetoeat;
 	int				timetosleep;
@@ -76,9 +81,15 @@ int					distributeforks(t_strct *philo, int *bfork);
 void				freestruct(t_strct *philo);
 t_strct				*init(char **input, t_strct *philo, int i, int *isdead);
 int					checkerror(char **input);
+int					threadjoin(int nofthreads, pthread_t *thread);
+int					threadcreate(int nofthreads, pthread_t *thread,\
+					t_strct *arg);
+int					initiatethread(t_strct *philo, int nbrphilos);
 int					main(int argc, char **argv);
 int					initsem(t_strct *philo);
-int					initproc(t_strct **philo, int *lfork, int *rfork);
+int					initproc(t_strct **philo, int *lfork, int *rfork,\
+					void *arg);
+void				*threadproc(void *arg);
 void				printmessage(t_strct *philo, int status);
 int					elapsed(struct timeval then, struct timeval now);
 void				*checktime(void *arg);
@@ -86,10 +97,11 @@ int					iswaiting(t_strct **philo);
 int					queue(t_strct *philo);
 int					ft_strlen(char *s);
 int					dead(t_strct *philo);
-int		givesem(t_strct *philo);
-int		forkcreate(t_strct *philo);
-int		waitfork(t_strct *philo);
-int		initiateforks(t_strct *philo, int nbrphilos);
-int		isliving(t_strct *philo);
+int					threaddetach(int nofthreads, pthread_t *thread);
+int					givesem(t_strct *philo);
+int					forkcreate(t_strct *philo);
+int					initiateforks(t_strct *philo, int nbrphilos);
+int					waitfork(t_strct *philo);
+void					*isliving(void *arg);
 
 #endif

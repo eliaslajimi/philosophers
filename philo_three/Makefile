@@ -16,7 +16,7 @@ DIR = ./srcs
 CC = gcc
 FLAGS = -Wall -Wextra -Werror -g 
 HEADR = srcs/philo_three.h
-TARGET = philo_three
+TARGET = philo_three 
 RM = rm
 RMFLAG = -f
 OBJ = $(SRC:%c=%o)
