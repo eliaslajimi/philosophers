@@ -87,15 +87,12 @@ t_strct		*init(char **input, t_strct *philo, int i, int *isdead)
 	int				*bfork;
 	int				*queue;
 	struct timeval	*stamp;
-	pthread_mutex_t	*mutex2;
 
 	if (!(bfork = malloc((ft_atoi(input[1]) + 1) * 4)))
 		return (NULL);
 	if (!(stamp = malloc(sizeof(struct timeval))))
 		return (NULL);
 	if (!(queue = malloc((ft_atoi(input[1])) * 4)))
-		return (NULL);
-	if (!(mutex2 = malloc((ft_atoi(input[1]) + 1) * sizeof(pthread_mutex_t))))
 		return (NULL);
 	if (!(philo = malloc(sizeof(t_strct) * (ft_atoi(input[1]) + 1))))
 		return (NULL);
