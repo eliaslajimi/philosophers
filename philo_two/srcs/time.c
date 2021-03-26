@@ -42,7 +42,6 @@ void	*checktime(void *arg)
 				if (dead(&philo[i]))
 					return (0);
 			i++;
-			usleep(2000);
 		}
 		i = 0;
 	}
